@@ -1,6 +1,4 @@
-# React + Vite
-
-🌱 PRODUTEC – Educação Ambiental Interativa
+#🌱 PRODUTEC – Educação Ambiental Interativa
 
 Funcionalidades Principais:
 
