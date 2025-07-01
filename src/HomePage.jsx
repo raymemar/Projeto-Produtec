@@ -41,10 +41,8 @@ export default function HomePage() {
           <div className="text-column">
             <div className="text-content">
               <p>O Projeto PRODUTEC teve início no ano de 2023 na Escola de Ensino Médio Abraão Baquit, com o <strong>propósito de desenvolver uma pesquisa científica voltada para o estudo da carnaúba</strong> como recurso estratégico e alternativa sustentável de extrativismo para a região.</p>
-
               <h4 className="section-title">Ceará Científico</h4>
               <p>O Ceará Científico configura-se como a <strong>maior iniciativa estadual de fomento à pesquisa e ao compartilhamento de conhecimentos</strong>, sendo promovido anualmente pelo Governo do Ceará, por meio da Secretaria da Educação (Seduc), e estruturado em três etapas: escolar, regional e estadual. O evento <strong>tem como objetivos primordiais desenvolver o conhecimento científico dentro do âmbito das escolas públicas, estimular a cultura, a inclusão e a cooperação</strong>, bem como fomentar a investigação científica e cultural no ambiente educacional.</p>
-
               <p>Em seu primeiro ano de execução, o projeto <strong>obteve destaque ao conquistar a terceira colocação na fase regional</strong> da CREDE 12. No ano subsequente, alcançou um marco significativo ao sagrar-se <strong>vencedor da etapa regional</strong>, garantindo, assim, sua participação na fase estadual, realizada em Fortaleza.</p>
             </div>
           </div>
@@ -57,7 +55,7 @@ export default function HomePage() {
 
         {/* Seções adicionais */}
         <div className="additional-content">
-          <h3 className="section-title">Próximos Passos</h3>
+          <h4 className="section-title">Próximos Passos</h4>
           <p>Em 2025, o projeto alinha-se à temática do Ceará Científico – <strong>"Educação Ambiental, Sustentabilidade e Emergência Climática"</strong> – com enfoque na produção e difusão de saberes científicos no contexto da crise climática global.</p>
 
           <h3 className="section-title-blue">Perspectivas para o Ceará Científico 2025</h3>
@@ -74,7 +72,7 @@ export default function HomePage() {
             <p>Produção de caderno de campo, elemento de suma importância para a avaliação do projeto</p>
           </div>
           <div className="foto-item">
-            <img src="/imagens/foto2.jpg" alt="Equipe com a bandeira" />
+            <img src="/foto2.png" alt="Equipe com a bandeira" />
             <p>Produção de caderno de campo, elemento de suma importância para a avaliação do projeto</p>
           </div>
           <div className="foto-item">
@@ -86,18 +84,40 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="footer-section">
-        <nav>
-          <ul>
-            <li><a href="/">Sobre Nós</a></li>
-            <li><a href="/carnauba">Carnaúba</a></li>
-            <li><a href="/arvores-nativas">Árvores Nativas</a></li>
-            <li><a href="/agentes">Agentes</a></li>
-            <li><a href="/quiz">Quiz</a></li>
-          </ul>
-        </nav>
-        <div className="redes-sociais">
-          <a href="#">Youtube</a>
-          <a href="#">Instagram</a>
+        <div className="footer-content">
+          <div className="footer-logo">
+            <h1>Projeto</h1>
+            <h2>PRODUTEC</h2>
+          </div>
+          
+          <div className="footer-nav">
+            <div className="nav-column">
+              <h4>Navegação</h4>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/carnauba">Carnaúba</a></li>
+                <li><a href="/arvores-nativas">Árvores Nativas</a></li>
+                <li><a href="/agentes">Agentes</a></li>
+                <li><a href="/quiz">Quiz</a></li>
+              </ul>
+            </div>
+            
+            <div className="nav-column">
+              <h4>Acesse também</h4>
+              <div className="social-links">
+                <a href="https://www.instagram.com/produtec2025/" className="social-link">
+                  <img src="/Vector_insta.png" alt="Instagram" className="social-icon" /> Instagram
+                </a>
+                <a href="#" className="social-link">
+                  <img src="/Vector_youtube.png" alt="Youtube" className="social-icon" /> Youtube
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div className="footer-button">
+            <button className="login-btn">Login Adm</button>
+          </div>
         </div>
       </footer>
     </div>

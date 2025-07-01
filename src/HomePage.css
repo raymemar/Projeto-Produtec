@@ -35,7 +35,6 @@
 /* Configuração específica para texto em negrito - usando Bold Italic */
 strong, b {
   font-family: 'Inter', sans-serif;
-  font-weight: 700;
   font-style: italic;
 }
 
@@ -45,13 +44,11 @@ strong, b {
 .header {
   background-color: #2d8a56;
   padding: 1rem 0;
-  position: sticky;
-  top: 0;
+  position: static;
   z-index: 100;
 }
 
 .header-content {
-  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -104,11 +101,12 @@ strong, b {
   padding: 3rem 2rem;
 }
 
+
 /* Layout principal com duas colunas */
 .content-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 1rem;
   align-items: start;
   margin-bottom: 4rem;
 }
@@ -118,13 +116,13 @@ strong, b {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 /* Título principal */
 .main-title {
   font-family: 'Quity', sans-serif;
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: 700;
   line-height: 1.2;
   color: black;
@@ -133,32 +131,33 @@ strong, b {
 
 .carnauba-illustration {
   width: 100%;
-  max-width: 300px;
+  max-width: 350px;
   margin-top: 1rem;
 }
 
 .carnauba-illustration img {
   width: 100%;
   height: auto;
+  rotate: -10deg;
 }
 
 /* Coluna da direita - Texto */
 .text-column {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding-top: 1rem;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
 }
 
 .text-content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.5rem;
 }
 
 .text-content p {
   line-height: 1.7;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: black;
   margin-bottom: 1rem;
   text-align: justify;
@@ -169,10 +168,10 @@ strong, b {
 }
 
 .section-title {
-  color: #2d8a56;
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin: 1.5rem 0 0.5rem 0;
+  color: black;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin: 0.5rem 0 0.5rem 0;
   font-family: 'Inter', sans-serif;
 }
 
@@ -187,12 +186,11 @@ strong, b {
 /* Seções adicionais */
 .additional-content {
   margin-top: 3rem;
-  max-width: 1000px;
 }
 
 .additional-content p {
   line-height: 1.7;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: black;
   margin-bottom: 1.5rem;
   text-align: justify;
@@ -232,9 +230,9 @@ strong, b {
 
 .galeria-section h3 {
   color: #D7FF20;
-  font-size: 2rem;
+  font-size: 3rem;
   margin-bottom: 2rem;
-  font-weight: 600;
+  font-weight: 800;
   padding: 1rem 2rem;
   border-radius: 10px;
   text-align: center;
@@ -279,53 +277,124 @@ strong, b {
    FOOTER
    ================================ */
 .footer-section {
-  background: #2d8a56;
+  background: url('/image 17.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   padding: 3rem 2rem;
-  text-align: center;
   margin-top: 4rem;
 }
 
-.footer-section nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
 }
 
-.footer-section nav a {
+.footer-logo h1 {
+  color: #D7FF20;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  font-family: 'Quity', sans-serif;
+}
+
+.footer-logo h2 {
+  color: #11DB63;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+  font-family: 'Quity', sans-serif;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+}
+
+.nav-column h4 {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-column ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nav-column a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 0.95rem;
   transition: color 0.3s ease;
   font-family: 'Inter', sans-serif;
 }
 
-.footer-section nav a:hover {
+.nav-column a:hover {
   color: #D7FF20;
 }
 
-.redes-sociais {
+.social-links {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.redes-sociais a {
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   color: white;
   text-decoration: none;
-  font-weight: 500;
-  padding: 0.8rem 1.5rem;
-  border: 2px solid white;
-  border-radius: 25px;
-  transition: all 0.3s ease;
+  font-weight: 400;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
   font-family: 'Inter', sans-serif;
 }
 
-.redes-sociais a:hover {
+.social-link:hover {
+  color: #D7FF20;
+}
+
+.social-icon {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+.footer-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.login-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
   background: white;
   color: #2d8a56;
 }
@@ -378,6 +447,11 @@ strong, b {
     padding: 2rem 1rem;
   }
   
+  .galeria-section h3 {
+    font-size: 2.2rem;
+    padding: 0.8rem 1.5rem;
+  }
+  
   .fotos-container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -390,6 +464,21 @@ strong, b {
   
   .vencedor-texto {
     font-size: 1.5rem;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  
+  .footer-nav {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footer-button {
+    justify-content: center;
   }
 }
 
