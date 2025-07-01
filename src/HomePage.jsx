@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './HomePage.css';
+import LoginPopup from './LoginPopup';
 
 export default function HomePage() {
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+
+  const handleLoginClick = () => {
+    setIsLoginPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsLoginPopupOpen(false);
+  };
+
   return (
     <div className="home-page">
       {/* Header com navegação */}
@@ -116,10 +127,18 @@ export default function HomePage() {
           </div>
           
           <div className="footer-button">
-            <button className="login-btn">Login Adm</button>
+            <button className="login-btn" onClick={handleLoginClick}>
+              Login Adm
+            </button>
           </div>
         </div>
       </footer>
+
+      {/* Popup de Login */}
+      <LoginPopup 
+        isOpen={isLoginPopupOpen} 
+        onClose={handleClosePopup} 
+      />
     </div>
   );
 }
