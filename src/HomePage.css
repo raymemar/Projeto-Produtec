@@ -109,6 +109,10 @@ strong, b {
   gap: 1rem;
   align-items: start;
   margin-bottom: 4rem;
+  max-width: 2000px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
 }
 
 /* Coluna da esquerda - Título e Imagem */
@@ -117,6 +121,7 @@ strong, b {
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+  padding-left: 1rem;
 }
 
 /* Título principal */
@@ -186,6 +191,10 @@ strong, b {
 /* Seções adicionais */
 .additional-content {
   margin-top: 3rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
 }
 
 .additional-content p {
@@ -422,11 +431,13 @@ strong, b {
   .content-layout {
     grid-template-columns: 1fr;
     gap: 2rem;
+    padding: 0 1rem;
   }
   
   .left-column {
     text-align: center;
     align-items: center;
+    padding-left: 0;
   }
   
   .main-title {
@@ -440,7 +451,7 @@ strong, b {
   
   .additional-content {
     margin-top: 2rem;
-    padding: 0;
+    padding: 0 1rem;
   }
   
   .galeria-section {
