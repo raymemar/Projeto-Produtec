@@ -26,6 +26,8 @@
 .nav-link,
 .logo h1,
 .logo h2,
+.logo-text,
+.logo-subtext,
 .main-title,
 .section-title-quity,
 .vencedor-texto {
@@ -36,6 +38,11 @@
 strong, b {
   font-family: 'Inter', sans-serif;
   font-style: italic;
+}
+
+/* Ajuste para barra de admin fixa */
+.home-page.admin-mode {
+  padding-top: 60px;
 }
 
 /* ================================
@@ -229,13 +236,6 @@ strong, b {
 /* ================================
    GALERIA DE FOTOS
    ================================ */
-.galeria-section {
-  margin-top: 4rem;
-  padding: 3rem;
-  background: #2d8a56;
-  border-radius: 20px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-}
 
 .galeria-section h3 {
   color: #D7FF20;
@@ -280,6 +280,14 @@ strong, b {
   line-height: 1.5;
   font-family: 'Inter', sans-serif;
   text-align: center;
+}
+
+/* Responsive para galeria */
+@media (max-width: 768px) {
+  .gallery-section {
+    padding: 40px 15px;
+  }
+  
 }
 
 /* ================================
@@ -406,6 +414,23 @@ strong, b {
 .login-btn:hover {
   background: white;
   color: #2d8a56;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: 2px solid #dc3545;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: transparent;
+  color: #dc3545;
 }
 
 /* ================================

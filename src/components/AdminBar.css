@@ -1,0 +1,182 @@
+/* ================================
+   BARRA DE ADMINISTRADOR
+   ================================ */
+
+.admin-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #2d8a56, #4CAF50);
+  color: white;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.admin-bar-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.admin-icon {
+  font-size: 20px;
+}
+
+.admin-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.edit-mode-badge {
+  background: rgba(215, 255, 32, 0.2);
+  color: #D7FF20;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(215, 255, 32, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.admin-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.admin-panel-btn {
+  background: rgba(33, 150, 243, 0.2);
+  color: #2196F3;
+  border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.admin-panel-btn:hover {
+  background: rgba(33, 150, 243, 0.3);
+  transform: translateY(-1px);
+}
+
+.export-btn {
+  background: rgba(156, 39, 176, 0.2);
+  color: #9C27B0;
+  border: 1px solid rgba(156, 39, 176, 0.3);
+}
+
+.export-btn:hover {
+  background: rgba(156, 39, 176, 0.3);
+  transform: translateY(-1px);
+}
+
+.reset-btn {
+  background: rgba(255, 152, 0, 0.2);
+  color: #FF9800;
+  border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.reset-btn:hover {
+  background: rgba(255, 152, 0, 0.3);
+  transform: translateY(-1px);
+}
+
+.logout-btn {
+  background: rgba(244, 67, 54, 0.2);
+  color: #F44336;
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.logout-btn:hover {
+  background: rgba(244, 67, 54, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Compensar altura da barra fixa */
+.admin-bar + * {
+  margin-top: 60px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .admin-bar-content {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 16px 20px;
+  }
+  
+  .admin-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .admin-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+  }
+  
+  .admin-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  
+  .edit-mode-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  
+  .admin-bar + * {
+    margin-top: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-bar-content {
+    padding: 12px 16px;
+  }
+  
+  .admin-text {
+    font-size: 12px;
+  }
+  
+  .admin-actions {
+    width: 100%;
+  }
+  
+  .admin-btn {
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+  }
+  
+  .admin-bar + * {
+    margin-top: 90px;
+  }
+}

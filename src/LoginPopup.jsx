@@ -1,26 +1,41 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './ADM/AuthContext';
 import './LoginPopup.css';
 
 const LoginPopup = ({ isOpen, onClose }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica de autenticação
-    console.log('Login attempt:', { username, password });
+    setLoading(true);
+    setError('');
     
-    // Exemplo de validação simples
-    if (username === 'admin' && password === 'admin123') {
-      alert('Login realizado com sucesso!');
-      onClose();
-    } else {
-      alert('Usuário ou senha incorretos!');
+    try {
+      const result = login(username, password);
+      
+      if (result.success) {
+        // Limpar campos
+        setUsername('');
+        setPassword('');
+        onClose();
+        
+        // Redirecionar para painel administrativo
+        navigate('/admin');
+      } else {
+        setError(result.message);
+      }
+    } catch (err) {
+      setError('Erro interno. Tente novamente.');
+    } finally {
+      setLoading(false);
     }
-    
-    // Limpar campos
-    setUsername('');
-    setPassword('');
   };
 
   if (!isOpen) return null;
@@ -36,6 +51,12 @@ const LoginPopup = ({ isOpen, onClose }) => {
         </div>
         
         <form onSubmit={handleSubmit} className="login-form">
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
+          
           <div className="form-group">
             <label htmlFor="username">Usuário</label>
             <input
@@ -45,6 +66,7 @@ const LoginPopup = ({ isOpen, onClose }) => {
               onChange={(e) => setUsername(e.target.value)}
               placeholder="usuário"
               required
+              disabled={loading}
             />
           </div>
           
@@ -57,12 +79,17 @@ const LoginPopup = ({ isOpen, onClose }) => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="senha"
               required
+              disabled={loading}
             />
           </div>
           
-          <button type="submit" className="login-button">
-            Entrar
+          <button type="submit" className="login-button" disabled={loading}>
+            {loading ? 'Entrando...' : 'Entrar'}
           </button>
+          
+          <div className="credentials-hint">
+            <small>Teste: adm-fulano / 12345adm</small>
+          </div>
         </form>
       </div>
     </div>
