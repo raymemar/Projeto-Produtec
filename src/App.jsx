@@ -4,7 +4,7 @@ import { AuthProvider } from './ADM/AuthContext';
 import ProtectedRoute from './ADM/ProtectedRoute';
 import './App.css';
 import HomePage from './HomePage';
-import ADM from './ADM/ADM';
+import QuizPage from './QuizPage';
 
 function App() {
   return (
@@ -13,14 +13,8 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route 
-              path="/admin" 
-              element={
-                <ProtectedRoute>
-                  <ADM />
-                </ProtectedRoute>
-              } 
-            />
+            <Route path="/quiz" element={<QuizPage />} />
+            {/* Adicione outras rotas protegidas aqui */}
           </Routes>
         </div>
       </Router>

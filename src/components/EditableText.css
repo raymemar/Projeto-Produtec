@@ -15,7 +15,7 @@
 }
 
 .view-mode:hover {
-  background-color: rgba(45, 138, 86, 0.1);
+  background-color: rgba(239, 255, 246, 0.1);
   box-shadow: 0 0 0 2px rgba(45, 138, 86, 0.2);
 }
 

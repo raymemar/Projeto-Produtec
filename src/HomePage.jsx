@@ -147,10 +147,6 @@ export default function HomePage() {
 
       {/* Seção de Galeria de Fotos */}
       <section className="gallery-section">
-        <EditableText
-          initialText="Nossa jornada em fotos"
-        />
-
         {/* Galeria de fotos editável */}
         <EditableGallery />
       </section>

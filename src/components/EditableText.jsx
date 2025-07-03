@@ -105,7 +105,6 @@ const EditableText = ({
             dangerouslySetInnerHTML={{ __html: text || initialText }}
           />
           <div className="edit-overlay">
-            <span className="edit-icon">✏️</span>
             <span className="edit-hint">Clique para editar</span>
           </div>
         </div>

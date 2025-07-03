@@ -96,7 +96,6 @@ const EditableGallery = () => {
             className="add-photo-btn"
             title="Adicionar nova foto"
           >
-            <span className="btn-icon">📸</span>
             Adicionar Foto
           </button>
         )}
@@ -106,7 +105,7 @@ const EditableGallery = () => {
         <div className="add-photo-popup-overlay" onClick={handleCancelAdd}>
           <div className="add-photo-popup" onClick={(e) => e.stopPropagation()}>
             <div className="popup-header">
-              <h4>📸 Adicionar Nova Foto à Galeria</h4>
+              <h4> Adicionar Nova Foto à Galeria</h4>
               <button 
                 onClick={handleCancelAdd} 
                 className="close-popup-btn"
@@ -118,7 +117,7 @@ const EditableGallery = () => {
             
             <div className="popup-content">
               <div className="form-section">
-                <label>🔗 URL da Imagem *</label>
+                <label> URL da Imagem *</label>
                 <input
                   type="url"
                   placeholder="https://exemplo.com/sua-imagem.jpg"
@@ -130,7 +129,7 @@ const EditableGallery = () => {
               </div>
 
               <div className="form-section">
-                <label>📝 Título da Foto *</label>
+                <label> Título da Foto </label>
                 <input
                   type="text"
                   placeholder="Ex: Apresentação do projeto na feira"
@@ -141,7 +140,7 @@ const EditableGallery = () => {
               </div>
 
               <div className="form-section">
-                <label>📋 Descrição *</label>
+                <label> Descrição *</label>
                 <textarea
                   placeholder="Descreva o que está acontecendo na foto, o contexto, as pessoas envolvidas..."
                   value={newPhoto.description}
@@ -152,7 +151,7 @@ const EditableGallery = () => {
               </div>
 
               <div className="form-section">
-                <label>🏷️ Texto Alternativo (opcional)</label>
+                <label> Texto Alternativo (opcional)</label>
                 <input
                   type="text"
                   placeholder="Descrição para acessibilidade (se vazio, usará o título)"
@@ -165,7 +164,7 @@ const EditableGallery = () => {
               
               {previewImage && (
                 <div className="preview-section">
-                  <label>👀 Preview da Imagem:</label>
+                  <label> Preview da Imagem:</label>
                   <div className="preview-container">
                     <img 
                       src={previewImage} 
@@ -180,7 +179,7 @@ const EditableGallery = () => {
             
             <div className="popup-actions">
               <button onClick={handleAddPhoto} className="add-btn">
-                ✅ Adicionar à Galeria
+                 Adicionar à Galeria
               </button>
               <button onClick={handleCancelAdd} className="cancel-btn">
                 ❌ Cancelar
@@ -199,7 +198,7 @@ const EditableGallery = () => {
                 className="delete-photo-btn"
                 title="Remover foto"
               >
-                🗑️
+                X
               </button>
             )}
             
@@ -248,7 +247,6 @@ const EditableGallery = () => {
 
       {photos.length === 0 && (
         <div className="empty-gallery">
-          <div className="empty-icon">📷</div>
           <p>Nenhuma foto adicionada ainda.</p>
           {isAuthenticated && (
             <button onClick={() => setShowAddForm(true)} className="empty-add-btn">
