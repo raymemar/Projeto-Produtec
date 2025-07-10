@@ -4,18 +4,28 @@ import { AuthProvider } from './ADM/AuthContext';
 import ProtectedRoute from './ADM/ProtectedRoute';
 import './App.css';
 import HomePage from './HomePage';
-import QuizPage from './QuizPage';
+import ArvoresNativas from './ArvoresNativas';
+import ADM from './ADM/ADM';
+import Agentes from './Agentes';
 
 function App() {
   return (
     <AuthProvider>
       <Router>
         <div className="App">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/quiz" element={<QuizPage />} />
-            {/* Adicione outras rotas protegidas aqui */}
-          </Routes>
+       <Routes>
+  <Route path="/" element={<HomePage />} />
+  <Route path="/arvores-nativas" element={<ArvoresNativas />} />
+  <Route path='/agentes' element={<Agentes />} />
+  <Route 
+    path="/admin" 
+    element={
+      <ProtectedRoute>
+        <ADM />
+      </ProtectedRoute>
+    } 
+  />
+</Routes> 
         </div>
       </Router>
     </AuthProvider>
