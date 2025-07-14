@@ -1,0 +1,154 @@
+@import url('./styles/fonts.css');
+
+/* Reset e configurações globais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* Fundo geral */
+.carnauba-page {
+  background: #f7f7e7;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Seção de introdução */
+.main-title {
+  font-family: "Quity", sans-serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color:  #368642;
+  margin: 0;
+}
+
+.intro-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 2rem 1rem 1rem 1rem;
+  flex-wrap: wrap;
+}
+
+.carnauba-illustration {
+  width: 100%;
+  max-width: 350px;
+  margin-top: 1rem;
+}
+
+.carnauba-illustration img {
+  width: 100%;
+  height: auto;
+  rotate: 30deg;
+}
+
+.intro-text {
+  flex: 2;
+  min-width: 220px;
+}
+
+.intro-image img {
+  width: 140px;
+  margin-left: 2rem;
+  margin-top: 0.5rem;
+}
+
+/* Títulos */
+.section-title {
+  color: #3a7d3a;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.section-title-green {
+  color: #3a7d3a;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.produtos-title {
+  color: #fff;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Texto principal */
+.section-text {
+  color: #333;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Multiplicidades */
+.multiplicidades-section {
+  background: #f7f7e7;
+  padding: 1rem 1rem 2rem 1rem;
+}
+
+/* Galeria de produtos */
+.produtos-section {
+  background: #3a7d3a;
+  color: #fff;
+  padding: 2rem 1rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+}
+
+.produtos-gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.produto-card {
+  background: #fff;
+  color: #333;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(60, 60, 60, 0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.produto-card img {
+  width: 100%;
+  max-width: 160px;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  object-fit: cover;
+}
+
+.produto-desc {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  color: #3a7d3a;
+}
+
+/* Responsivo */
+@media (max-width: 700px) {
+  .intro-section {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 0.5rem;
+  }
+  .intro-image img {
+    margin-left: 0;
+    margin-top: 1rem;
+    width: 100px;
+  }
+  .produtos-gallery {
+    grid-template-columns: 1fr;
+  }
+  .produtos-section {
+    margin: 1rem 0;
+    padding: 1rem 0.5rem;
+  }
+}
