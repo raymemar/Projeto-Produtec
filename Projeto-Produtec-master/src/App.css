@@ -1,0 +1,8 @@
+body {
+    font-family: var(--font-primary);
+}
+
+h1,
+h2 {
+    font-family: var(--font-display);
+}
