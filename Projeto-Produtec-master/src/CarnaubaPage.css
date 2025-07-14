@@ -80,15 +80,24 @@
 
 /* Texto principal */
 .section-text {
+  width: 100%;
   color: #333;
   font-size: 1rem;
   margin-bottom: 1rem;
+  
 }
 
 /* Multiplicidades */
 .multiplicidades-section {
   background: #f7f7e7;
   padding: 1rem 1rem 2rem 1rem;
+}
+/* Texto de introdução */
+.intro-text {
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 /* Galeria de produtos */
