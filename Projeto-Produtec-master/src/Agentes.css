@@ -1,0 +1,296 @@
+/* Importação das fontes */
+@import url("./styles/fonts.css");
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+strong,
+b {
+  font-family: "Inter", sans-serif;
+  font-style: italic;
+}
+
+.agentes-page {
+  font-family: "Inter", sans-serif;
+  background-color: #f5f5f5;
+  color: black;
+}
+
+/* Configuração geral da fonte Inter para todos os textos */
+.agentes-page * {
+  font-family: "Inter", sans-serif;
+}
+
+.main-content {
+  margin: 4rem auto;
+  width: 100%;
+}
+
+.title-section {
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.content-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
+}
+
+.left-column {
+  border-radius: 8px;
+}
+
+.right-column {
+  border-radius: 8px;
+}
+
+.main-title {
+  font-family: "Quity", sans-serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: black;
+  margin: 0;
+}
+
+.text-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.text-content p {
+  line-height: 1.7;
+  font-size: 1.15rem;
+  color: black;
+  margin-bottom: 3rem;
+  text-align: justify;
+}
+
+.text-content p:last-child {
+  margin-bottom: 0;
+  margin-top: 1rem;
+  margin-left: 4rem;
+}
+
+.section-title {
+  color: #2d8a56;
+  font-weight: 800;
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: 3.2rem;
+  font-family: "Inter", sans-serif;
+}
+
+.section-text p {
+  line-height: 1.7;
+  font-size: 1.15rem;
+  margin: 1.5rem;
+  text-align: justify;
+}
+
+.galeria-agentes {
+  text-align: left;
+}
+
+.chamada-agentes {
+  text-align: left;
+  margin: 2rem 0;
+}
+
+.botao-agentes {
+  background: #2d8a56;
+  color: fff;
+  font-weight: 700;
+  cursor: pointer;
+  display: block;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.botao-agentes:hover {
+  background-color: #1f6a3c;
+}
+
+.galeria-agentes {
+  text-align: left;
+  background-color: #2d8a56;
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.agentes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 0 auto;
+  padding: 0 3rem;
+  justify-content: left;
+}
+
+.agentes-title {
+  color: #c8dc6d;
+  font-weight: 800;
+  margin: 0.5rem 0 0.5rem 0;
+  font-family: "Quity", sans-serif;
+}
+
+.agente-card {
+  background: #2d8a56;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: stretch;
+  padding: 0;
+  width: 100%;
+}
+
+.agente-card:hover {
+  transform: translateY(-5px);
+}
+
+.agente-image {
+  width: 100%;
+  margin: 0;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+}
+.agente-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.agente-info {
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  text-align: left;
+}
+.agente-name {
+  color: #ace4f5;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-family: "Quity", sans-serif !important;
+}
+.agente-descripition {
+  line-height: 1.7;
+  color: #f5f5f5;
+  font-size: 1.13rem;
+  margin-bottom: 0;
+  font-family: "Inter", sans-serif;
+}
+
+.virar-agente {
+  text-align: left;
+  padding: 2rem 2rem;
+}
+
+.virar-agente-title {
+  color: #1f6a3c;
+  font-weight: 800;
+  margin: 0.5rem 0 0.5rem 0;
+  font-size: 3.2rem;
+  font-family: "Quity", sans-serif;
+}
+
+.texto-chamada {
+  font-family: "Inter", sans-serif;
+  line-height: 1.7;
+  font-size: 1.15rem;
+  color: black;
+  margin-bottom: 3rem;
+  text-align: justify;
+}
+.interesses-container {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-start;
+  align-items: stretch;
+  margin-bottom: 2rem;
+}
+.interesse-1 {
+  font-weight: 700;
+  background-color: #254614;
+  border-radius: 4px;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.interesse-2 {
+  font-weight: 700;
+  background-color: #254614;
+  border-radius: 4px;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.interesse-3 {
+  font-weight: 700;
+  background-color: #254614;
+  border-radius: 4px;
+  padding: 1rem;
+  color: white;
+  text-align: center;
+}
+
+.faça-parte {
+  background-color: #2d8a56;
+  border-radius: 10px;
+  padding: 2rem;
+  align-items: end;
+  display: flex;
+  flex-direction: column;
+}
+
+.faça-parte-title {
+  color: #c8dc6d;
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin: 0.5rem 0 0.5rem 0;
+  font-family: "Quity", sans-serif;
+}
+
+.faça-parte-texto {
+  color: #f5f5f5;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  text-align: justify;
+  font-family: "Inter", sans-serif;
+}
+
+.botao-agentes-faça-parte {
+  background: #74a828;
+  color: fff;
+  font-weight: 700;
+  cursor: pointer;
+  display: block;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.botao-agentes-faça-parte:hover {
+  background-color: #1f6a3c;
+}
