@@ -133,24 +133,97 @@
     align-items: center;
 }
 
-.palm-leaf {
-    width: 200px;
-    height: 200px;
-    background: linear-gradient(45deg, #11DB63, #2d8a56);
-    clip-path: polygon(50% 0%, 80% 20%, 100% 50%, 80% 80%, 50% 100%, 20% 80%, 0% 50%, 20% 20%);
-    position: relative;
+.main-timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-.palm-leaf::before {
+.main-timer {
+    margin-bottom: 1rem;
+}
+
+.main-timer-circle {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 8px solid #f0f0f0;
+}
+
+.main-timer-fill {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    width: 216px;
+    height: 216px;
+    border-radius: 50%;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        var(--timer-color, #2ed573) var(--progress-angle, 0deg),
+        transparent var(--progress-angle, 0deg)
+    );
+    transform: rotate(-90deg);
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.main-timer-fill::before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 150px;
-    height: 150px;
-    background: #11DB63;
-    clip-path: polygon(50% 0%, 75% 25%, 100% 50%, 75% 75%, 50% 100%, 25% 75%, 0% 50%, 25% 25%);
+    top: 8px;
+    left: 8px;
+    width: 200px;
+    height: 200px;
+    background: white;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.main-timer-text {
+    position: relative;
+    z-index: 3;
+    font-weight: bold;
+    font-size: 3rem;
+    color: #333;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main-timer.timer-warning .main-timer-text {
+    color: #ff4757;
+    animation: pulse 1s infinite;
+}
+
+.main-timer.timer-expired .main-timer-circle {
+    border-color: #ff4757;
+    background: #ffebee;
+}
+
+.main-timer.timer-expired .main-timer-fill {
+    background: conic-gradient(
+        from 0deg,
+        #ff4757 0deg,
+        #ff4757 360deg
+    ) !important;
+}
+
+.main-timer.timer-expired .main-timer-text {
+    color: #ff4757;
+    font-size: 2rem;
+}
+
+.timer-label {
+    font-size: 1.1rem;
+    color: #666;
+    font-weight: 500;
+    text-align: center;
 }
 
 /* Quiz Section */
@@ -247,32 +320,245 @@
     transform: translateY(-2px);
 }
 
+/* ================================
+   TIMER E PROGRESSO
+   ================================ */
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2d8a56, #4a7c59);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-weight: 600;
+    color: #2d8a56;
+    font-size: 0.9rem;
+}
+
+.timer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.timer {
+    margin-bottom: 1rem;
+}
+
+.timer-circle {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.timer-fill {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background: #2ed573;
+    transform-origin: left center;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.timer-text {
+    position: relative;
+    z-index: 2;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.timer-warning .timer-text {
+    color: #ff4757;
+    animation: pulse 1s infinite;
+}
+
+.timer-expired .timer-circle {
+    background: #ff4757;
+}
+
+.timer-expired .timer-text {
+    color: white;
+    font-size: 0.9rem;
+}
+
+.time-expired-message {
+    color: #ff4757;
+    font-weight: 600;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+}
+
+/* Banner de tempo expirado */
+.time-expired-banner {
+    background: linear-gradient(135deg, #ff4757, #ff6b6b);
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    text-align: center;
+    animation: slideIn 0.5s ease-out;
+}
+
+.time-expired-banner .time-expired-message {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Result Section */
 .result-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 2rem;
+}
+
+.result-content {
     background: white;
     border-radius: 20px;
     padding: 3rem;
     text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
 }
 
-.result-section h2 {
-    font-size: 2rem;
+.result-content h1 {
+    font-size: 2.5rem;
     color: #2d8a56;
     margin-bottom: 2rem;
+    font-family: 'Quity', sans-serif;
 }
 
-.score-circle {
+.score-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.score-circle-big {
     width: 150px;
     height: 150px;
-    background: #368642;
     border-radius: 50%;
+    background: linear-gradient(135deg, #2d8a56, #4a7c59);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
     color: white;
+    margin-bottom: 1rem;
+    box-shadow: 0 8px 25px rgba(45, 138, 86, 0.3);
+}
+
+.score-number {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.score-total {
+    font-size: 1.5rem;
+    opacity: 0.9;
+}
+
+.percentage {
     font-size: 2rem;
     font-weight: bold;
+    color: #2d8a56;
+    margin-bottom: 1rem;
+}
+
+.result-message {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.restart-button {
+    background: #ff6b6b;
+}
+
+.restart-button:hover {
+    background: #ee5a52;
+}
+
+.home-button {
+    background: #4ecdc4;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-button:hover {
+    background: #45b7aa;
 }
 
 /* ================================
@@ -418,7 +704,36 @@
     color: #dc3545;
 }
 
-/* Responsividade */
+/* ================================
+   OPÇÕES E ESTADOS
+   ================================ */
+.option.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.option.incorrect {
+    background-color: #ffe8e8;
+    border-color: #ff4757;
+    color: #d63031;
+}
+
+.quiz-button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+
+.quiz-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+
+/* ================================
+   RESPONSIVIDADE PARA TIMER
+   ================================ */
 @media (max-width: 768px) {
     .header-content {
         flex-direction: column;
@@ -459,5 +774,83 @@
     
     .footer-button {
         justify-content: center;
+    }
+    
+    .quiz-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .progress-container {
+        justify-content: center;
+    }
+    
+    .progress-bar {
+        width: 150px;
+    }
+    
+    .timer-circle {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .timer-text {
+        font-size: 1rem;
+    }
+    
+    .result-content {
+        padding: 2rem;
+        margin: 1rem;
+    }
+    
+    .result-content h1 {
+        font-size: 2rem;
+    }
+    
+    .score-circle-big {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .score-number {
+        font-size: 2.5rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    /* Responsividade para o timer principal */
+    .main-timer-circle {
+        width: 150px;
+        height: 150px;
+        border: 6px solid #f0f0f0;
+    }
+    
+    .main-timer-fill {
+        top: -6px;
+        left: -6px;
+        width: 162px;
+        height: 162px;
+    }
+    
+    .main-timer-fill::before {
+        top: 6px;
+        left: 6px;
+        width: 150px;
+        height: 150px;
+    }
+    
+    .main-timer-text {
+        font-size: 2.5rem;
+    }
+    
+    .main-timer.timer-expired .main-timer-text {
+        font-size: 1.5rem;
+    }
+    
+    .timer-label {
+        font-size: 1rem;
     }
 }
