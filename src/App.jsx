@@ -7,7 +7,7 @@ import HomePage from './HomePage';
 import ArvoresNativas from './ArvoresNativas';
 import ADM from './ADM/ADM';
 import Agentes from './Agentes';
-import Carnauba from './CarnaubaPage';
+import Carnauba from './Carnauba';
 
 function App() {
   return (
