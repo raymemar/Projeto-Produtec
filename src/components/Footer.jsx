@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../ADM/AuthContext';
 export default function Footer() {
   const { isAuthenticated, logout } = useAuth();
@@ -16,19 +17,19 @@ export default function Footer() {
             <h4>Navegação</h4>
             <ul>
               <li>
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a href="/carnauba">Carnaúba</a>
+                <Link to="/carnauba">Carnaúba</Link>
               </li>
               <li>
-                <a href="/arvores-nativas">Árvores Nativas</a>
+                <Link to="/arvores-nativas">Árvores Nativas</Link>
               </li>
               <li>
-                <a href="/agentes">Agentes</a>
+                <Link to="/agentes">Agentes</Link>
               </li>
               <li>
-                <a href="/quiz">Quiz</a>
+                <Link to="/quiz">Quiz</Link>
               </li>
             </ul>
           </div>
