@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAuth } from './ADM/AuthContext';
 import './HomePage.css';
 import LoginPopup from './components/LoginPopup';
@@ -42,11 +41,11 @@ export default function HomePage() {
             />
           </div>
           <nav className="nav-menu">
-            <Link to="/" className="nav-link">Sobre Nós</Link>
-            <Link to="/carnauba" className="nav-link">Carnaúba</Link>
-            <Link to="/arvores-nativas" className="nav-link">Árvores Nativas</Link>
-            <Link to="/agentes" className="nav-link">Agentes</Link>
-            <Link to="/quiz" className="nav-link">Quiz</Link>
+            <a href="/" className="nav-link">Sobre Nós</a>
+            <a href="/carnauba" className="nav-link">Carnaúba</a>
+            <a href="/arvores-nativas" className="nav-link">Árvores Nativas</a>
+            <a href="/agentes" className="nav-link">Agentes</a>
+            <a href="/quiz" className="nav-link">Quiz</a>
           </nav>
         </div>
       </header>
@@ -164,11 +163,11 @@ export default function HomePage() {
             <div className="nav-column">
               <h4>Navegação</h4>
               <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/carnauba">Carnaúba</Link></li>
-                <li><Link to="/arvores-nativas">Árvores Nativas</Link></li>
-                <li><Link to="/agentes">Agentes</Link></li>
-                <li><Link to="/quiz">Quiz</Link></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/carnauba">Carnaúba</a></li>
+                <li><a href="/arvores-nativas">Árvores Nativas</a></li>
+                <li><a href="/agentes">Agentes</a></li>
+                <li><a href="/quiz">Quiz</a></li>
               </ul>
             </div>
             

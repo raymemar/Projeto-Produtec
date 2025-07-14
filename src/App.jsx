@@ -4,11 +4,10 @@ import { AuthProvider } from './ADM/AuthContext';
 import ProtectedRoute from './ADM/ProtectedRoute';
 import './App.css';
 import HomePage from './HomePage';
-import Carnauba from './Carnauba';
 import ArvoresNativas from './ArvoresNativas';
 import ADM from './ADM/ADM';
 import Agentes from './Agentes';
-import QuizPage from './QuizPage';
+import Carnauba from './CarnaubaPage';
 
 function App() {
   return (
@@ -17,10 +16,9 @@ function App() {
         <div className="App">
        <Routes>
   <Route path="/" element={<HomePage />} />
-  <Route path="/carnauba" element={<Carnauba />} />
   <Route path="/arvores-nativas" element={<ArvoresNativas />} />
   <Route path='/agentes' element={<Agentes />} />
-  <Route path='/quiz' element={<QuizPage />} />
+  <Route path='/carnauba' element={<Carnauba />} />
   <Route 
     path="/admin" 
     element={
