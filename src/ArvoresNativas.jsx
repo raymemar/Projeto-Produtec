@@ -69,8 +69,6 @@ export default function ArvoresNativas() {
          
         </section>
 
-
-      </main>
         {/* Galeria de Árvores */}
         <section className="trees-gallery">
           <div className='arvores-nativas'>
@@ -216,7 +214,9 @@ export default function ArvoresNativas() {
             </div>
           </div>
         </section>
-      <Footer />
+      </main>
+      
+      <Footer onLoginClick={handleLoginClick} />
       
       <LoginPopup 
         isOpen={isLoginPopupOpen} 

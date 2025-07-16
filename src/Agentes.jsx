@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LoginPopup from "./components/LoginPopup";
 import EditableText from "./components/EditableText";
+import CadastroAgente from "./components/CadastroAgente";
 import './Agentes.css';
 import EditableGallery from './components/EditableGallery';
 
@@ -12,14 +13,21 @@ import Group117 from './assets/Group117.png';
 
 
 export default function Agentes() {
-    const[isLoginPopupOpen, setIsLoginPopupOpen] =  React.useState(false);
-    const{isAuthenticated,logout}= useAuth();
+    const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
+    const [isCadastroOpen, setIsCadastroOpen] = React.useState(false);
+    const { isAuthenticated, logout } = useAuth();
 
-    const handleLoginClick = () =>
-    setIsLoginPopupOpen(true);
+    const handleLoginClick = () => setIsLoginPopupOpen(true);
     const handleLogoutClick = () => logout();
-    const handleClosePopup = () =>
-    setIsLoginPopupOpen(false);
+    const handleClosePopup = () => setIsLoginPopupOpen(false);
+    
+    const handleCadastroClick = () => setIsCadastroOpen(true);
+    const handleCloseCadastro = () => setIsCadastroOpen(false);
+    
+    const handleCadastroSuccess = (novoAgente) => {
+        console.log('Novo agente cadastrado:', novoAgente);
+        // Aqui você pode adicionar lógica adicional, como atualizar uma lista de agentes
+    };
 
 return (
     <div className=" agentes-page">
@@ -61,7 +69,7 @@ return (
                     className="section-text"
                 />
                  <section className="chamada-agentes">
-                 <button className="botao-agentes">Seja um agente!</button>
+                 <button className="botao-agentes" onClick={handleCadastroClick}>Seja um agente!</button>
                 </section>
 
             </div>  
@@ -175,14 +183,28 @@ return (
             />
 
             <section className="chamada-agentes">
-            <button className="botao-agentes-faça-parte"> Quero ser um agente</button>
-        </section>
+                <button 
+                    className="botao-agentes-faça-parte"
+                    onClick={handleCadastroClick}
+                >
+                    Quero ser um agente
+                </button>
+            </section>
 
         </section>
         
-        <Footer />
+        <Footer onLoginClick={handleLoginClick} />
 
-        {isLoginPopupOpen && <LoginPopup onClose={handleClosePopup} />}
+        <LoginPopup 
+            isOpen={isLoginPopupOpen} 
+            onClose={handleClosePopup} 
+        />
+        
+        <CadastroAgente 
+            isOpen={isCadastroOpen}
+            onClose={handleCloseCadastro}
+            onSuccess={handleCadastroSuccess}
+        />
     </div>
 )
 

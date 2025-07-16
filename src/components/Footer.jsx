@@ -1,20 +1,38 @@
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../ADM/AuthContext';
-export default function Footer() {
+import LoginPopup from './LoginPopup';
+import './Footer.css';
+
+export default function Footer({ onLoginClick }) {
   const { isAuthenticated, logout } = useAuth();
+  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  
   const handleLogoutClick = () => logout();
-  const handleLoginClick = () => window.location.href = '/admin';
+  
+  const handleLoginClick = () => {
+    if (onLoginClick) {
+      onLoginClick();
+    } else {
+      // Fallback: abrir popup próprio
+      setIsLoginPopupOpen(true);
+    }
+  };
+
+  const handleClosePopup = () => {
+    setIsLoginPopupOpen(false);
+  };
   return (
     <footer className="footer-section">
       <div className="footer-content">
         <div className="footer-logo">
-          <h1>Projeto</h1>
-          <h2>PRODUTEC</h2>
+          <h1 className="footer-logo-text">Projeto</h1>
+          <h2 className="footer-logo-subtext">PRODUTEC</h2>
         </div>
 
         <div className="footer-nav">
           <div className="nav-column">
-            <h4>Navegação</h4>
+            <h4 className="nav-column-title">Navegação</h4>
             <ul>
               <li>
                 <Link to="/">Home</Link>
@@ -35,7 +53,7 @@ export default function Footer() {
           </div>
 
           <div className="nav-column">
-            <h4>Acesse também</h4>
+            <h4 className="nav-column-title">Acesse também</h4>
             <div className="social-links">
               <a
                 href="https://www.instagram.com/produtec2025/"
@@ -63,15 +81,21 @@ export default function Footer() {
         <div className="footer-button">
           {isAuthenticated ? (
             <button className="logout-btn" onClick={handleLogoutClick}>
-              Sair
+              <span className="button-text">Sair</span>
             </button>
           ) : (
             <button className="login-btn" onClick={handleLoginClick}>
-              Login Adm
+              <span className="button-text">Login Adm</span>
             </button>
           )}
         </div>
       </div>
+
+      {/* Popup de Login próprio do Footer */}
+      <LoginPopup 
+        isOpen={isLoginPopupOpen} 
+        onClose={handleClosePopup} 
+      />
     </footer>
   );
 }

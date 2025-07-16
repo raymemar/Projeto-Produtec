@@ -5,6 +5,8 @@ import './HomePage.css';
 import LoginPopup from './components/LoginPopup';
 import EditableText from './components/EditableText';
 import EditableGallery from './components/EditableGallery';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 export default function HomePage() {
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
@@ -24,33 +26,8 @@ export default function HomePage() {
 
   return (
     <div className="home-page">
-      {/* Header com navegação */}
-      <header className="header">
-        <div className="header-content">
-          <div className="logo">
-            <EditableText
-              id="logo_projeto"
-              initialText="Projeto"
-              tag="h1"
-              className="logo-text"
-            />
-            <EditableText
-              id="logo_produtec"
-              initialText="PRODUTEC"
-              tag="h2"
-              className="logo-subtext"
-            />
-          </div>
-          <nav className="nav-menu">
-            <Link to="/" className="nav-link">Sobre Nós</Link>
-            <Link to="/carnauba" className="nav-link">Carnaúba</Link>
-            <Link to="/arvores-nativas" className="nav-link">Árvores Nativas</Link>
-            <Link to="/agentes" className="nav-link">Agentes</Link>
-            <Link to="/quiz" className="nav-link">Quiz</Link>
-          </nav>
-        </div>
-      </header>
-
+      <Header />
+      
       {/* Conteúdo principal */}
       <main className="main-content">
         {/* Layout principal com duas colunas */}
@@ -65,7 +42,7 @@ export default function HomePage() {
               multiline={true}
             />
             <div className="carnauba-illustration">
-              <img src="/Group-121.png" alt="Ilustração da Carnaúba" />
+              <img src="/Carnauba.png" alt="Ilustração da Carnaúba" />
             </div>
           </div>
           
@@ -152,52 +129,7 @@ export default function HomePage() {
         <EditableGallery />
       </section>
 
-      {/* Footer */}
-      <footer className="footer-section">
-        <div className="footer-content">
-          <div className="footer-logo">
-            <h1>Projeto</h1>
-            <h2>PRODUTEC</h2>
-          </div>
-          
-          <div className="footer-nav">
-            <div className="nav-column">
-              <h4>Navegação</h4>
-              <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/carnauba">Carnaúba</Link></li>
-                <li><Link to="/arvores-nativas">Árvores Nativas</Link></li>
-                <li><Link to="/agentes">Agentes</Link></li>
-                <li><Link to="/quiz">Quiz</Link></li>
-              </ul>
-            </div>
-            
-            <div className="nav-column">
-              <h4>Acesse também</h4>
-              <div className="social-links">
-                <a href="https://www.instagram.com/produtec2025/" className="social-link">
-                  <img src="/Vector_insta.png" alt="Instagram" className="social-icon" /> Instagram
-                </a>
-                <a href="#" className="social-link">
-                  <img src="/Vector_youtube.png" alt="Youtube" className="social-icon" /> Youtube
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <div className="footer-button">
-            {isAuthenticated ? (
-              <button className="logout-btn" onClick={handleLogoutClick}>
-                Sair
-              </button>
-            ) : (
-              <button className="login-btn" onClick={handleLoginClick}>
-                Login Adm
-              </button>
-            )}
-          </div>
-        </div>
-      </footer>
+      <Footer onLoginClick={handleLoginClick} />
 
       {/* Popup de Login */}
       <LoginPopup 

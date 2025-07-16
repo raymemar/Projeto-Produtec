@@ -1,6 +1,6 @@
 # 🎯 Sistema de Edição PRODUTEC
 
-## 🚀 Como Usar o Sistema de Administração
+##  Como Usar o Sistema de Administração
 
 ### 1. **Fazer Login como Administrador**
 - Acesse a página inicial do projeto

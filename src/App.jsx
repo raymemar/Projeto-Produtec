@@ -6,9 +6,9 @@ import './App.css';
 import HomePage from './HomePage';
 import Carnauba from './Carnauba';
 import ArvoresNativas from './ArvoresNativas';
-import ADM from './ADM/ADM';
 import Agentes from './Agentes';
 import QuizPage from './QuizPage';
+import GerenciadorAgentes from './components/GerenciadorAgentes';
 
 function App() {
   return (
@@ -22,10 +22,10 @@ function App() {
   <Route path='/agentes' element={<Agentes />} />
   <Route path='/quiz' element={<QuizPage />} />
   <Route 
-    path="/admin" 
+    path="/gerenciador-agentes" 
     element={
       <ProtectedRoute>
-        <ADM />
+        <GerenciadorAgentes />
       </ProtectedRoute>
     } 
   />

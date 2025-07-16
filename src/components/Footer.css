@@ -1,0 +1,221 @@
+/* ================================
+   FOOTER
+   ================================ */
+.footer-section {
+  background: url("/image 17.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  padding: 3rem 2rem;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+  max-width: 1200px;
+}
+
+.footer-logo h1 {
+  color: #d7ff20;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.2;
+  font-family: "Quity", sans-serif;
+}
+
+.footer-logo h2 {
+  color: #11db63;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1;
+  font-family: "Quity", sans-serif;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+}
+
+.nav-column h4 {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+.nav-column ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-column li {
+  margin: 0;
+}
+
+.nav-column a {
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.nav-column a:hover {
+  color: #d7ff20;
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.social-link:hover {
+  color: #d7ff20;
+}
+
+.social-icon {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+  filter: brightness(0) invert(1) sepia(1) saturate(10000%) hue-rotate(70deg);
+}
+
+.footer-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.login-btn {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: white;
+  color: #2d8a56;
+}
+
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: 2px solid #dc3545;
+  padding: 0.8rem 1.5rem;
+  border-radius: 25px;
+  font-weight: 500;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: transparent;
+  color: #dc3545;
+}
+
+/* ================================
+   RESPONSIVIDADE
+   ================================ */
+@media (max-width: 768px) {
+  .footer-section {
+    padding: 2rem 1rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .footer-nav {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .footer-button {
+    justify-content: center;
+  }
+
+  .footer-logo h1 {
+    font-size: 1.3rem;
+  }
+
+  .footer-logo h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-section {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .footer-content {
+    gap: 1.5rem;
+  }
+
+  .footer-nav {
+    gap: 1.5rem;
+  }
+
+  .nav-column h4 {
+    font-size: 1rem;
+  }
+
+  .nav-column a,
+  .social-link {
+    font-size: 0.9rem;
+  }
+
+  .login-btn,
+  .logout-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .footer-logo h1 {
+    font-size: 1.2rem;
+  }
+
+  .footer-logo h2 {
+    font-size: 1.4rem;
+  }
+}

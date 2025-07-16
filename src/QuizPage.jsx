@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from './ADM/AuthContext';
+import LoginPopup from './components/LoginPopup';
+import EditableText from './components/EditableText';
+import EditableQuiz from './components/EditableQuiz';
+import Header from './components/Header';
+import Footer from './components/Footer';
 import "./QuizPage.css";
 
 const perguntas = [
@@ -24,14 +30,14 @@ const perguntas = [
         resposta: "A: Pereiro",
     },
     {
-        pergunta: "5. Qual palmeira é conhecida como 'árvore da vida' e produz cera natural?",
-        opcoes: ["A: Licuri", "B: Carnaúba", "C: Tucumã", "D: Buriti"],
-        resposta: "B: Carnaúba",
+        pergunta: "5. Qual árvore é conhecida por produzir uma resina medicinal chamada 'breu'?",
+        opcoes: ["A: Barriguda (Cavanillesia arborea)", "B: Aroeira (Schinus terebinthifolius)", "C: Angico (Anadenanthera colubrina)", "D: Jucá (Libidibia ferrea)"],
+        resposta: "A: Barriguda (Cavanillesia arborea)",
     },
     {
-        pergunta: "6. Qual árvore da Caatinga é utilizada para alimentação animal e possui espinhos?",
-        opcoes: ["A: Xique-xique", "B: Mandacaru", "C: Palma", "D: Todas as anteriores"],
-        resposta: "D: Todas as anteriores",
+        pergunta: "6. Qual dessas árvores possui espinhos e é importante para a apicultura na Caatinga?",
+        opcoes: ["A: Jurema-preta (Mimosa tenuiflora)", "B: Mandacaru (Cereus jamacaru)", "C: Xique-xique (Pilosocereus gounellei)", "D: Macambira (Bromelia laciniosa)"],
+        resposta: "A: Jurema-preta (Mimosa tenuiflora)",
     },
     {
         pergunta: "7. Qual dessas espécies é considerada indicadora de água subterrânea?",
@@ -39,19 +45,19 @@ const perguntas = [
         resposta: "A: Juazeiro",
     },
     {
-        pergunta: "8. Qual árvore produz uma resina aromática utilizada em rituais e medicina?",
-        opcoes: ["A: Angico", "B: Aroeira", "C: Imburana", "D: Cumaru"],
-        resposta: "C: Imburana",
+        pergunta: "8. Qual árvore tem um tronco inchado que armazena água, adaptação à seca?",
+        opcoes: ["A: Barriguda (Cavanillesia arborea)", "B: Mandacaru (Cereus jamacaru)", "C: Juazeiro (Ziziphus joazeiro)", "D: Aroeira (Schinus terebinthifolius)"],
+        resposta: "A: Barriguda (Cavanillesia arborea)",
     },
     {
-        pergunta: "9. Qual dessas plantas é considerada símbolo de resistência do sertão?",
-        opcoes: ["A: Xique-xique", "B: Mandacaru", "C: Coroa-de-frade", "D: Todas as anteriores"],
-        resposta: "D: Todas as anteriores",
+        pergunta: "9. Qual dessas árvores é típica da Caatinga e fornece sombra para o gado?",
+        opcoes: ["A: Sabiá (Mimosa caesalpiniifolia)", "B: Jucá (Libidibia ferrea)", "C: Angico (Anadenanthera colubrina)", "D: Mulungu (Erythrina velutina)"],
+        resposta: "A: Sabiá (Mimosa caesalpiniifolia)",
     },
     {
-        pergunta: "10. Qual árvore da Caatinga tem flores roxas e é muito valorizada na medicina popular?",
-        opcoes: ["A: Pau-d'arco", "B: Mulungu", "C: Mororó", "D: Jucá"],
-        resposta: "A: Pau-d'arco",
+        pergunta: "10. Qual árvore possui frutos em forma de vagem e é usada como forragem?",
+        opcoes: ["A: Algaroba (Prosopis juliflora)", "B: Jurema-branca (Piptadenia stipulacea)", "C: Catingueira (Poincianella pyramidalis)", "D: Imburana (Commiphora leptophloeos)"],
+        resposta: "A: Algaroba (Prosopis juliflora)",
     },
 ];
 
@@ -63,22 +69,44 @@ function QuizPage() {
     const [finalizado, setFinalizado] = useState(false);
     const [score, setScore] = useState(0); // ✅ Score atual
     const [tempoExpirado, setTempoExpirado] = useState(false); // 🚫 Controla se tempo expirou
+    const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+    const [perguntasEditaveis, setPerguntasEditaveis] = useState(perguntas);
     
-    // Simplificando sem AuthContext por enquanto
-    const isAuthenticated = false;
+    // Usando o contexto de autenticação real
+    const { isAuthenticated, logout } = useAuth();
+    
+    // Função para salvar pergunta editada
+    const handleSaveQuestion = (index, updatedQuestion) => {
+        const newPerguntas = [...perguntasEditaveis];
+        newPerguntas[index] = updatedQuestion;
+        setPerguntasEditaveis(newPerguntas);
+        
+        // Salvar no localStorage para persistir as alterações
+        localStorage.setItem('quiz_perguntas', JSON.stringify(newPerguntas));
+    };
+    
+    // Carregar perguntas do localStorage se existirem
+    useEffect(() => {
+        const savedPerguntas = localStorage.getItem('quiz_perguntas');
+        if (savedPerguntas) {
+            setPerguntasEditaveis(JSON.parse(savedPerguntas));
+        }
+    }, []);
     
     const handleLoginClick = () => {
-        // Lógica para abrir modal de login
-        console.log('Login clicked');
+        setIsLoginPopupOpen(true);
     };
     
     const handleLogoutClick = () => {
-        // Lógica para logout
-        console.log('Logout clicked');
+        logout();
+    };
+
+    const handleClosePopup = () => {
+        setIsLoginPopupOpen(false);
     };
 
     const proximo = () => {
-        if (indice + 1 < perguntas.length) {
+        if (indice + 1 < perguntasEditaveis.length) {
             setIndice((i) => i + 1);
             setSelecionada("");
             setMostrarResposta(false);
@@ -107,7 +135,7 @@ function QuizPage() {
     const enviar = () => {
         if (selecionada && !tempoExpirado) {
             setMostrarResposta(true);
-            if (selecionada === perguntas[indice].resposta) {
+            if (selecionada === perguntasEditaveis[indice].resposta) {
                 const novoScore = score + 1;
                 setScore(novoScore);
                 localStorage.setItem("scoreTotal", novoScore); 
@@ -117,7 +145,7 @@ function QuizPage() {
 
     // Se o quiz terminou
     if (finalizado) {
-        const porcentagem = Math.round((score / perguntas.length) * 100);
+        const porcentagem = Math.round((score / perguntasEditaveis.length) * 100);
         let mensagem = "";
         let emoji = "";
         
@@ -133,78 +161,76 @@ function QuizPage() {
         
         return (
             <div className="quiz-container">
-                <header className="header">
-                    <div className="header-content">
-                        <div className="logo">
-                            <h1 className="logo-text">Projeto</h1>
-                            <h2 className="logo-subtext">PRODUTEC</h2>
-                        </div>
-                        <nav className="nav-menu">
-                            <Link to="/" className="nav-link">Sobre Nós</Link>
-                            <Link to="/carnauba" className="nav-link">Carnaúba</Link>
-                            <Link to="/arvores-nativas" className="nav-link">Árvores Nativas</Link>
-                            <Link to="/agentes" className="nav-link">Agentes</Link>
-                            <Link to="/quiz" className="nav-link active">Quiz</Link>
-                        </nav>
-                    </div>
-                </header>
+                <Header />
                 
                 <main className="quiz-main">
                     <div className="result-section">
                         <div className="result-content">
-                            <h1>{emoji} Quiz Finalizado!</h1>
+                            <EditableText
+                                id="quiz_completion_title"
+                                initialText="Quiz Finalizado!"
+                                tag="h1"
+                                className="result-title"
+                            />
                             <div className="score-display">
                                 <div className="score-circle-big">
                                     <span className="score-number">{score}</span>
-                                    <span className="score-total">/{perguntas.length}</span>
+                                    <span className="score-total">/{perguntasEditaveis.length}</span>
                                 </div>
                                 <div className="percentage">{porcentagem}%</div>
                             </div>
                             <p className="result-message">{mensagem}</p>
                             <div className="action-buttons">
-                                <button 
+                                <EditableText
+                                    id="quiz_restart_button"
+                                    initialText="Tentar Novamente"
+                                    tag="button"
                                     className="quiz-button restart-button"
                                     onClick={() => window.location.reload()}
-                                >
-                                    Tentar Novamente
-                                </button>
+                                />
                                 <Link to="/" className="quiz-button home-button">
-                                    Voltar ao Início
+                                    <EditableText
+                                        id="quiz_home_button"
+                                        initialText="Voltar ao Início"
+                                        tag="span"
+                                        className="button-text"
+                                    />
                                 </Link>
                             </div>
                         </div>
                     </div>
                 </main>
+                
+                {/* Popup de Login */}
+                <LoginPopup 
+                    isOpen={isLoginPopupOpen} 
+                    onClose={handleClosePopup} 
+                />
             </div>
         );
     }
 
-    const pergunta = perguntas[indice];
+    const pergunta = perguntasEditaveis[indice];
 
     return (
         <div className="quiz-container">
-            {/* Header com navegação */}
-            <header className="header">
-                <div className="header-content">
-                    <div className="logo">
-                        <h1 className="logo-text">Projeto</h1>
-                        <h2 className="logo-subtext">PRODUTEC</h2>
-                    </div>
-                    <nav className="nav-menu">
-                        <Link to="/" className="nav-link">Sobre Nós</Link>
-                        <Link to="/carnauba" className="nav-link">Carnaúba</Link>
-                        <Link to="/arvores-nativas" className="nav-link">Árvores Nativas</Link>
-                        <Link to="/agentes" className="nav-link">Agentes</Link>
-                        <Link to="/quiz" className="nav-link active">Quiz</Link>
-                    </nav>
-                </div>
-            </header>
+            <Header />
 
             <main className="quiz-main">
                 <div className="quiz-intro">
                     <div className="quiz-text">
-                        <h1>Vamos testar seus conhecimentos sobre as árvores da Caatinga</h1>
-                        <p>Agora que você já leu sobre as árvores da Caatinga, que tal colocar seus saberes à prova com esse quiz? Rola para baixo e comece já.</p>
+                        <EditableText
+                            id="quiz_main_title"
+                            initialText="Vamos testar seus conhecimentos sobre as árvores da Caatinga"
+                            tag="h1"
+                            className="quiz-title"
+                        />
+                        <EditableText
+                            id="quiz_main_description"
+                            initialText="Agora que você já leu sobre as árvores da Caatinga, que tal colocar seus saberes à prova com esse quiz? Rola para baixo e comece já."
+                            tag="p"
+                            className="quiz-description"
+                        />
                     </div>
                     <div className="quiz-image">
                         <div className="main-timer-container">
@@ -234,61 +260,95 @@ function QuizPage() {
                                     </div>
                                 </div>
                             </div>
-                            <p className="timer-label">Tempo restante</p>
+                            <EditableText
+                                id="timer_label"
+                                initialText="Tempo restante"
+                                tag="p"
+                                className="timer-label"
+                            />
                         </div>
                     </div>
                 </div>
 
                 <div className="quiz-section">
                     <div className="quiz-header">
-                        <h2>Pergunta {indice + 1} de {perguntas.length}</h2>
+                        <h2>Pergunta {indice + 1} de {perguntasEditaveis.length}</h2>
                         <div className="progress-container">
                             <div className="progress-bar">
                                 <div 
                                     className="progress-fill" 
-                                    style={{ width: `${((indice + 1) / perguntas.length) * 100}%` }}
+                                    style={{ width: `${((indice + 1) / perguntasEditaveis.length) * 100}%` }}
                                 ></div>
                             </div>
-                            <span className="progress-text">{indice + 1}/{perguntas.length}</span>
+                            <span className="progress-text">{indice + 1}/{perguntasEditaveis.length}</span>
                         </div>
                     </div>
 
                     {tempoExpirado && (
                         <div className="time-expired-banner">
-                            <p className="time-expired-message"> Tempo esgotado! Passando para a próxima pergunta...</p>
+                            <EditableText
+                                id="time_expired_message"
+                                initialText="⏰ Tempo esgotado! Passando para a próxima pergunta..."
+                                tag="p"
+                                className="time-expired-message"
+                            />
                         </div>
                     )}
                     
-                    <div className="question-container">
-                        <h3>{pergunta.pergunta}</h3>
-                        
-                        <div className="options-container">
-                            {pergunta.opcoes.map((opcao, i) => (
-                                <div
-                                    key={i}
-                                    className={`option ${opcao === selecionada ? 'selected' : ''} ${
-                                        mostrarResposta && opcao === pergunta.resposta ? 'correct' : ''
-                                    } ${mostrarResposta && opcao === selecionada && opcao !== pergunta.resposta ? 'incorrect' : ''} ${
-                                        tempoExpirado ? 'disabled' : ''
-                                    }`}
-                                    onClick={() => !mostrarResposta && !tempoExpirado && setSelecionada(opcao)}
+                    {isAuthenticated ? (
+                        <EditableQuiz
+                            pergunta={pergunta.pergunta}
+                            opcoes={pergunta.opcoes}
+                            resposta={pergunta.resposta}
+                            onSave={handleSaveQuestion}
+                            perguntaIndex={indice}
+                        />
+                    ) : (
+                        <div className="question-container">
+                            <h3>{pergunta.pergunta}</h3>
+                            
+                            <div className="options-container">
+                                {pergunta.opcoes.map((opcao, i) => (
+                                    <div
+                                        key={i}
+                                        className={`option ${opcao === selecionada ? 'selected' : ''} ${
+                                            mostrarResposta && opcao === pergunta.resposta ? 'correct' : ''
+                                        } ${mostrarResposta && opcao === selecionada && opcao !== pergunta.resposta ? 'incorrect' : ''} ${
+                                            tempoExpirado ? 'disabled' : ''
+                                        }`}
+                                        onClick={() => !mostrarResposta && !tempoExpirado && setSelecionada(opcao)}
+                                    >
+                                        <span className="option-checkbox">●</span>
+                                        {opcao}
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            {!tempoExpirado && (
+                                <button 
+                                    className={`quiz-button ${!selecionada ? 'disabled' : ''}`}
+                                    onClick={!mostrarResposta ? enviar : proximo}
+                                    disabled={!selecionada && !mostrarResposta}
                                 >
-                                    <span className="option-checkbox">●</span>
-                                    {opcao}
-                                </div>
-                            ))}
+                                    {!mostrarResposta ? (
+                                        <EditableText
+                                            id="quiz_check_answer_button"
+                                            initialText="Confira seu resultado"
+                                            tag="span"
+                                            className="button-text"
+                                        />
+                                    ) : (
+                                        <EditableText
+                                            id="quiz_next_question_button"
+                                            initialText="Próxima pergunta"
+                                            tag="span"
+                                            className="button-text"
+                                        />
+                                    )}
+                                </button>
+                            )}
                         </div>
-                        
-                        {!tempoExpirado && (
-                            <button 
-                                className={`quiz-button ${!selecionada ? 'disabled' : ''}`}
-                                onClick={!mostrarResposta ? enviar : proximo}
-                                disabled={!selecionada && !mostrarResposta}
-                            >
-                                {!mostrarResposta ? 'Confira seu resultado' : 'Próxima pergunta'}
-                            </button>
-                        )}
-                    </div>
+                    )}
                 </div>
 
                 {finalizado && (
@@ -301,51 +361,13 @@ function QuizPage() {
                 )}
             </main>
 
-            <footer className="footer-section">
-                <div className="footer-content">
-                    <div className="footer-logo">
-                        <h1>Projeto</h1>
-                        <h2>PRODUTEC</h2>
-                    </div>
-                    
-                    <div className="footer-nav">
-                        <div className="nav-column">
-                            <h4>Navegação</h4>
-                            <ul>
-                                <li><Link to="/">Home</Link></li>
-                                <li><Link to="/carnauba">Carnaúba</Link></li>
-                                <li><Link to="/arvores-nativas">Árvores Nativas</Link></li>
-                                <li><Link to="/agentes">Agentes</Link></li>
-                                <li><Link to="/quiz">Quiz</Link></li>
-                            </ul>
-                        </div>
-                        
-                        <div className="nav-column">
-                            <h4>Acesse também</h4>
-                            <div className="social-links">
-                                <a href="https://www.instagram.com/produtec2025/" className="social-link">
-                                    <img src="/Vector_insta.png" alt="Instagram" className="social-icon" /> Instagram
-                                </a>
-                                <a href="#" className="social-link">
-                                    <img src="/Vector_youtube.png" alt="Youtube" className="social-icon" /> Youtube
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div className="footer-button">
-                        {isAuthenticated ? (
-                            <button className="logout-btn" onClick={handleLogoutClick}>
-                                Sair
-                            </button>
-                        ) : (
-                            <button className="login-btn" onClick={handleLoginClick}>
-                                Login Adm
-                            </button>
-                        )}
-                    </div>
-                </div>
-            </footer>
+            <Footer onLoginClick={handleLoginClick} />
+
+            {/* Popup de Login */}
+            <LoginPopup 
+                isOpen={isLoginPopupOpen} 
+                onClose={handleClosePopup} 
+            />
         </div>
     );
 }
