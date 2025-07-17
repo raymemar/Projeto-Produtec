@@ -8,10 +8,21 @@
     box-sizing: border-box;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
 .quiz-container {
     min-height: 100vh;
     background-color: #f5f5f5;
     font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 /* Garantir que o Header seja exibido na página do quiz */
@@ -39,8 +50,10 @@
 
 /* Quiz Main Content */
 .quiz-main {
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
 }
 
 /* Quiz Intro Section */
@@ -48,15 +61,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
-    padding: 2rem;
+    margin: 0;
+    padding: 3rem 2rem;
     background: white;
-    border-radius: 20px;
+    border-radius: 0;
+    width: 100%;
+    max-width: none;
 }
 
 .quiz-text {
     flex: 1;
-    max-width: 60%;
+    max-width: 100%;
 }
 
 .quiz-text h1 {
@@ -111,12 +126,10 @@
     width: 216px;
     height: 216px;
     border-radius: 50%;
-    background: conic-gradient(
-        from 0deg,
-        transparent 0deg,
-        var(--timer-color, #2ed573) var(--progress-angle, 0deg),
-        transparent var(--progress-angle, 0deg)
-    );
+    background: conic-gradient(from 0deg,
+            transparent 0deg,
+            var(--timer-color, #2ed573) var(--progress-angle, 0deg),
+            transparent var(--progress-angle, 0deg));
     transform: rotate(-90deg);
     transition: all 0.3s ease;
     z-index: 1;
@@ -154,11 +167,9 @@
 }
 
 .main-timer.timer-expired .main-timer-fill {
-    background: conic-gradient(
-        from 0deg,
-        #ff4757 0deg,
-        #ff4757 360deg
-    ) !important;
+    background: conic-gradient(from 0deg,
+            #ff4757 0deg,
+            #ff4757 360deg) !important;
 }
 
 .main-timer.timer-expired .main-timer-text {
@@ -176,10 +187,11 @@
 /* Quiz Section */
 .quiz-section {
     background: #368642;
-    border-radius: 20px;
-    padding: 3rem;
+    border-radius: 0;
+    padding: 3rem 2rem;
     color: white;
-    margin-bottom: 2rem;
+    margin: 0;
+    width: 100%;
 }
 
 .quiz-section h2 {
@@ -193,6 +205,9 @@
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
     padding: 2rem;
+    width: 100%;
+    max-width: none;
+    margin: 0;
 }
 
 .question-container h3 {
@@ -270,10 +285,13 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    padding: 1rem;
+    padding: 1rem 2rem;
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: none;
+    margin: 0 0 2rem 0;
 }
 
 .progress-container {
@@ -370,11 +388,12 @@
 .time-expired-banner {
     background: linear-gradient(135deg, #ff4757, #ff6b6b);
     color: white;
-    padding: 1rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 0;
+    margin: 0;
     text-align: center;
     animation: slideIn 0.5s ease-out;
+    width: 100%;
 }
 
 .time-expired-banner .time-expired-message {
@@ -384,13 +403,27 @@
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes slideIn {
@@ -398,6 +431,7 @@
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -410,20 +444,21 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    width: 100vw;
-    padding: 1rem;
+    width: 100%;
+    padding: 2rem;
     background-color: #f5f5f5;
     position: relative;
+    margin: 0;
 }
 
 .result-content {
     background: white;
     border-radius: 20px;
-    padding: 4rem;
+    padding: 4rem 2rem;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: none;
+    width: 95%;
+    max-width: 800px;
 }
 
 .result-content h1 {
@@ -540,91 +575,99 @@
     .quiz-intro {
         flex-direction: column;
         text-align: center;
+        padding: 2rem 1rem;
     }
-    
+
+    .quiz-section {
+        padding: 2rem 1rem;
+    }
+
     .quiz-text {
         max-width: 100%;
         margin-bottom: 2rem;
     }
-    
+
     .quiz-text h1 {
         font-size: 2rem;
     }
-    
+
     .quiz-header {
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+        margin: 0 0 2rem 0;
+        padding: 1rem;
     }
-    
+
     .progress-container {
         justify-content: center;
     }
-    
+
     .progress-bar {
         width: 150px;
     }
-    
+
     .timer-circle {
         width: 60px;
         height: 60px;
     }
-    
+
     .timer-text {
         font-size: 1rem;
     }
-    
+
     .result-content {
-        padding: 2rem;
+        padding: 2rem 1rem;
         margin: 1rem;
+        width: calc(100% - 2rem);
     }
-    
+
     .result-content h1 {
         font-size: 2rem;
     }
-    
+
     .score-circle-big {
         width: 120px;
         height: 120px;
     }
-    
+
     .score-number {
         font-size: 2.5rem;
     }
-    
+
     .action-buttons {
         flex-direction: column;
     }
-    
+
     /* Responsividade para o timer principal */
     .main-timer-circle {
         width: 150px;
         height: 150px;
         border: 6px solid #f0f0f0;
     }
-    
+
     .main-timer-fill {
         top: -6px;
         left: -6px;
         width: 162px;
         height: 162px;
     }
-    
+
     .main-timer-fill::before {
         top: 6px;
         left: 6px;
         width: 150px;
         height: 150px;
     }
-    
+
     .main-timer-text {
         font-size: 2.5rem;
     }
-    
+
     .main-timer.timer-expired .main-timer-text {
         font-size: 1.5rem;
     }
-    
+
     .timer-label {
         font-size: 1rem;
     }
@@ -676,7 +719,9 @@
     z-index: 10;
 }
 
-.edit-btn, .save-btn, .cancel-btn {
+.edit-btn,
+.save-btn,
+.cancel-btn {
     background-color: #007bff;
     color: white;
     border: none;

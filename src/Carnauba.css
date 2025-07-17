@@ -6,153 +6,248 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100vh;
+}
+
 /* Fundo geral */
 .carnauba-page {
-  background: #f7f7e7;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f7f7e7;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+/* Conteúdo principal */
+.main-content {
+    width: 100%;
+    min-height: 100vh;
+    background: #f7f7e7;
+    padding: 0;
+    margin: 0;
 }
 
 /* Seção de introdução */
-.main-title {
-  font-family: "Quity", sans-serif;
-  font-size: 3.2rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color:  #368642;
-  margin: 0;
-}
-
 .intro-section {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 2rem 1rem 1rem 1rem;
-  flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem;
+    background: #f7f7e7;
+    width: 100%;
+    min-height: 400px;
+    overflow: visible;
 }
 
-.carnauba-illustration {
-  width: 100%;
-  max-width: 350px;
-  margin-top: 1rem;
+.intro-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-left: 1rem;
+    min-height: 400px;
+    flex: 1;
+}
+
+.main-title {
+    font-family: "Quity", sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #368642;
+    margin: 0;
+}
+
+.section-text {
+    color: #333;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.section-text strong {
+    font-weight: 600;
+}
+
+/* Estilo específico para a descrição da carnaúba */
+.carnauba_description {
+    color: #333;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    text-align: justify;
 }
 
 .carnauba-illustration img {
-  width: 100%;
-  height: auto;
-  rotate: 30deg;
+    width: 100%;
+    height: auto;
+    rotate: -10deg;
 }
 
-.intro-image img {
-  width: 140px;
-  margin-left: 2rem;
-  margin-top: 0.5rem;
-}
-
-/* Títulos */
-.section-title {
-  color: #3a7d3a;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+/* Seção multiplicidades */
+.multiplicidades-section {
+    background: #f7f7e7;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2rem;
+    max-width: 1200px;
+    width: 100%;
 }
 
 .section-title-green {
-  color: #3a7d3a;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+    color: #368642;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    font-family: "Quity", sans-serif;
+}
+
+.multiplicidades-text {
+    color: #333;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    text-align: justify;
+}
+
+.multiplicidades-text strong {
+    font-weight: 600;
+}
+
+/* Seção de produtos */
+.produtos-section {
+    background: #368642;
+    color: white;
+    padding: 3rem 4rem;
+    margin: 0;
+    width: 100%;
 }
 
 .produtos-title {
-  color: #fff;
-  font-size: 1.3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-/* Texto principal */
-.section-text {
-  width: 100%;
-  color: #333;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  
-}
-
-/* Multiplicidades */
-.multiplicidades-section {
-  background: #f7f7e7;
-  padding: 1rem 1rem 2rem 1rem;
-}
-/* Texto de introdução */
-.intro-text {
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-/* Galeria de produtos */
-.produtos-section {
-  background: #3a7d3a;
-  color: #fff;
-  padding: 2rem 1rem;
-  border-radius: 20px;
-  margin: 2rem 0;
+    color: #fff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+    font-family: "Quity", sans-serif;
 }
 
 .produtos-gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .produto-card {
-  background: #fff;
-  color: #333;
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(60, 60, 60, 0.07);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    background: transparent;
+    color: white;
+    border-radius: 0;
+    padding: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
 }
 
 .produto-card img {
-  width: 100%;
-  max-width: 160px;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-  object-fit: cover;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 3px solid #4a9c5a;
 }
 
 .produto-desc {
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  color: #3a7d3a;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: white;
+    line-height: 1.4;
+    margin-top: 0.5rem;
 }
 
-/* Responsivo */
-@media (max-width: 700px) {
-  .intro-section {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 0.5rem;
-  }
-  .intro-image img {
-    margin-left: 0;
-    margin-top: 1rem;
-    width: 100px;
-  }
-  .produtos-gallery {
-    grid-template-columns: 1fr;
-  }
-  .produtos-section {
-    margin: 1rem 0;
-    padding: 1rem 0.5rem;
-  }
+/* Responsividade */
+@media (max-width: 768px) {
+    .intro-section {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .intro-text {
+        text-align: center;
+        align-items: center;
+        padding-left: 0;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .multiplicidades-section {
+        margin-top: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .produtos-section {
+        padding: 2rem 1rem;
+    }
+    
+    .produtos-gallery {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .section-title-green {
+        font-size: 1.8rem;
+    }
+    
+    .produtos-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 2rem;
+    }
+    
+    .section-title-green {
+        font-size: 1.2rem;
+    }
+    
+    .produtos-title {
+        font-size: 1.2rem;
+    }
+    
+    .intro-section {
+        padding: 0 1rem;
+    }
+    
+    .multiplicidades-section {
+        padding: 0 1rem;
+    }
+    
+    .produtos-section {
+        padding: 1rem;
+    }
+    
+    .produto-card img {
+        height: 200px;
+    }
 }

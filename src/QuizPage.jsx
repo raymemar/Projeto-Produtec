@@ -71,20 +71,20 @@ function QuizPage() {
     const [tempoExpirado, setTempoExpirado] = useState(false); // 🚫 Controla se tempo expirou
     const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
     const [perguntasEditaveis, setPerguntasEditaveis] = useState(perguntas);
-    
+
     // Usando o contexto de autenticação real
     const { isAuthenticated, logout } = useAuth();
-    
+
     // Função para salvar pergunta editada
     const handleSaveQuestion = (index, updatedQuestion) => {
         const newPerguntas = [...perguntasEditaveis];
         newPerguntas[index] = updatedQuestion;
         setPerguntasEditaveis(newPerguntas);
-        
+
         // Salvar no localStorage para persistir as alterações
         localStorage.setItem('quiz_perguntas', JSON.stringify(newPerguntas));
     };
-    
+
     // Carregar perguntas do localStorage se existirem
     useEffect(() => {
         const savedPerguntas = localStorage.getItem('quiz_perguntas');
@@ -92,11 +92,11 @@ function QuizPage() {
             setPerguntasEditaveis(JSON.parse(savedPerguntas));
         }
     }, []);
-    
+
     const handleLoginClick = () => {
         setIsLoginPopupOpen(true);
     };
-    
+
     const handleLogoutClick = () => {
         logout();
     };
@@ -138,7 +138,7 @@ function QuizPage() {
             if (selecionada === perguntasEditaveis[indice].resposta) {
                 const novoScore = score + 1;
                 setScore(novoScore);
-                localStorage.setItem("scoreTotal", novoScore); 
+                localStorage.setItem("scoreTotal", novoScore);
             }
         }
     };
@@ -148,7 +148,7 @@ function QuizPage() {
         const porcentagem = Math.round((score / perguntasEditaveis.length) * 100);
         let mensagem = "";
         let emoji = "";
-        
+
         if (porcentagem >= 90) {
             mensagem = "Excelente! Você é um expert em árvores da Caatinga!";
         } else if (porcentagem >= 70) {
@@ -158,11 +158,11 @@ function QuizPage() {
         } else {
             mensagem = "Que tal estudar mais sobre as árvores da Caatinga?";
         }
-        
+
         return (
             <div className="quiz-container">
                 <Header />
-                
+
                 <main className="quiz-main">
                     <div className="result-section">
                         <div className="result-content">
@@ -200,11 +200,11 @@ function QuizPage() {
                         </div>
                     </div>
                 </main>
-                
+
                 {/* Popup de Login */}
-                <LoginPopup 
-                    isOpen={isLoginPopupOpen} 
-                    onClose={handleClosePopup} 
+                <LoginPopup
+                    isOpen={isLoginPopupOpen}
+                    onClose={handleClosePopup}
                 />
             </div>
         );
@@ -236,9 +236,9 @@ function QuizPage() {
                         <div className="main-timer-container">
                             <div className={`main-timer ${tempo <= 10 ? 'timer-warning' : ''} ${tempoExpirado ? 'timer-expired' : ''}`}>
                                 <div className="main-timer-circle">
-                                    <div 
-                                        className="main-timer-fill" 
-                                        style={{ 
+                                    <div
+                                        className="main-timer-fill"
+                                        style={{
                                             '--progress-angle': `${((30 - tempo) / 30) * 360}deg`,
                                             '--timer-color': (() => {
                                                 const progress = (30 - tempo) / 30; // 0 = início, 1 = fim
@@ -275,8 +275,8 @@ function QuizPage() {
                         <h2>Pergunta {indice + 1} de {perguntasEditaveis.length}</h2>
                         <div className="progress-container">
                             <div className="progress-bar">
-                                <div 
-                                    className="progress-fill" 
+                                <div
+                                    className="progress-fill"
                                     style={{ width: `${((indice + 1) / perguntasEditaveis.length) * 100}%` }}
                                 ></div>
                             </div>
@@ -294,7 +294,7 @@ function QuizPage() {
                             />
                         </div>
                     )}
-                    
+
                     {isAuthenticated ? (
                         <EditableQuiz
                             pergunta={pergunta.pergunta}
@@ -306,16 +306,14 @@ function QuizPage() {
                     ) : (
                         <div className="question-container">
                             <h3>{pergunta.pergunta}</h3>
-                            
+
                             <div className="options-container">
                                 {pergunta.opcoes.map((opcao, i) => (
                                     <div
                                         key={i}
-                                        className={`option ${opcao === selecionada ? 'selected' : ''} ${
-                                            mostrarResposta && opcao === pergunta.resposta ? 'correct' : ''
-                                        } ${mostrarResposta && opcao === selecionada && opcao !== pergunta.resposta ? 'incorrect' : ''} ${
-                                            tempoExpirado ? 'disabled' : ''
-                                        }`}
+                                        className={`option ${opcao === selecionada ? 'selected' : ''} ${mostrarResposta && opcao === pergunta.resposta ? 'correct' : ''
+                                            } ${mostrarResposta && opcao === selecionada && opcao !== pergunta.resposta ? 'incorrect' : ''} ${tempoExpirado ? 'disabled' : ''
+                                            }`}
                                         onClick={() => !mostrarResposta && !tempoExpirado && setSelecionada(opcao)}
                                     >
                                         <span className="option-checkbox">●</span>
@@ -323,9 +321,9 @@ function QuizPage() {
                                     </div>
                                 ))}
                             </div>
-                            
+
                             {!tempoExpirado && (
-                                <button 
+                                <button
                                     className={`quiz-button ${!selecionada ? 'disabled' : ''}`}
                                     onClick={!mostrarResposta ? enviar : proximo}
                                     disabled={!selecionada && !mostrarResposta}
@@ -364,13 +362,12 @@ function QuizPage() {
             <Footer onLoginClick={handleLoginClick} />
 
             {/* Popup de Login */}
-            <LoginPopup 
-                isOpen={isLoginPopupOpen} 
-                onClose={handleClosePopup} 
+            <LoginPopup
+                isOpen={isLoginPopupOpen}
+                onClose={handleClosePopup}
             />
         </div>
     );
 }
 
 export default QuizPage;
-

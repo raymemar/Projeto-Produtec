@@ -471,3 +471,125 @@
     padding: 0.4rem 0.8rem;
   }
 }
+
+/* ================================
+   MODAL DE CONFIRMAÇÃO
+   ================================ */
+
+.confirm-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 1rem;
+}
+
+.confirm-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 0;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.confirm-modal-content {
+  padding: 2rem;
+  text-align: center;
+}
+
+.confirm-modal-content h3 {
+  color: #ff6b35;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.confirm-modal-content p {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.confirm-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cancel-confirm-button {
+  background: #f5f5f5;
+  color: #333;
+  border: 2px solid #ddd;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.cancel-confirm-button:hover {
+  background: #e8e8e8;
+  border-color: #bbb;
+}
+
+.continue-confirm-button {
+  background: #8BC34A;
+  color: white;
+  border: 2px solid #8BC34A;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+.continue-confirm-button:hover {
+  background: #7CB342;
+  border-color: #7CB342;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsividade para modal */
+@media (max-width: 768px) {
+  .confirm-modal {
+    margin: 1rem;
+    max-width: calc(100% - 2rem);
+  }
+  
+  .confirm-modal-content {
+    padding: 1.5rem;
+  }
+  
+  .confirm-modal-actions {
+    flex-direction: column;
+  }
+  
+  .cancel-confirm-button,
+  .continue-confirm-button {
+    width: 100%;
+  }
+}

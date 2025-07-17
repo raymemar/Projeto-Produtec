@@ -16,6 +16,7 @@ const CadastroAgente = ({ isOpen, onClose, onSuccess }) => {
   
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
 
   const steps = [
     { id: 'dados-iniciais', title: 'Dados iniciais', completed: false },
@@ -33,9 +34,26 @@ const CadastroAgente = ({ isOpen, onClose, onSuccess }) => {
   };
 
   const handleNext = () => {
+    // Mostrar modal de confirmação apenas nas etapas 0 (Dados iniciais) e 1 (Escola)
+    if (currentStep === 0 || currentStep === 1) {
+      setShowConfirmModal(true);
+    } else {
+      // Para outras etapas, avançar diretamente
+      if (currentStep < steps.length - 1) {
+        setCurrentStep(currentStep + 1);
+      }
+    }
+  };
+
+  const handleConfirmNext = () => {
+    setShowConfirmModal(false);
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
     }
+  };
+
+  const handleCancelNext = () => {
+    setShowConfirmModal(false);
   };
 
   const handleBack = () => {
@@ -347,6 +365,29 @@ const CadastroAgente = ({ isOpen, onClose, onSuccess }) => {
           </div>
         </div>
       </div>
+      
+      {/* Modal de confirmação */}
+      {showConfirmModal && (
+        <div className="confirm-modal-overlay" onClick={handleCancelNext}>
+          <div className="confirm-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="confirm-modal-content">
+              <h3>⚠️ Confirmação</h3>
+              <p>
+                Confira atentamente suas informações antes de continuar. 
+                Após essa etapa, não será possível fazer alterações.
+              </p>
+              <div className="confirm-modal-actions">
+                <button onClick={handleCancelNext} className="cancel-confirm-button">
+                  Revisar informações
+                </button>
+                <button onClick={handleConfirmNext} className="continue-confirm-button">
+                  Continuar mesmo assim
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

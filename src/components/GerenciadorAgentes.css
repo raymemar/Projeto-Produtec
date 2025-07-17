@@ -8,14 +8,15 @@
   background-color: #f5f5f5;
   color: black;
   max-width: 2000px;
-  min-height: 100vh; /* 👈 Faz com que ocupe toda a altura da tela */
+  min-height: 100vh;
+  /* 👈 Faz com que ocupe toda a altura da tela */
   display: flex;
   flex-direction: column;
 }
 
 
 .gerenciador-container {
-    flex: 1;
+  flex: 1;
   margin: 0;
   padding: 2rem;
   max-width: none;

@@ -5,6 +5,8 @@
 .editable-container {
   position: relative;
   width: 100%;
+  overflow: visible;
+  min-height: 1.5em;
 }
 
 .view-mode {
@@ -12,6 +14,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 4px;
+  min-height: inherit;
 }
 
 .view-mode:hover {
@@ -61,12 +64,14 @@
 .editing-mode {
   width: 100%;
   position: relative;
+  overflow: visible;
+  min-height: inherit;
 } 
 
 .editable-input,
 .editable-textarea {
   width: 100%;
-  padding: 12px;
+  padding: 4px;
   border: 2px solid #2d8a56;
   border-radius: 8px;
   font-family: inherit;
@@ -78,6 +83,8 @@
   box-shadow: 0 4px 12px rgba(45, 138, 86, 0.2);
   resize: none;
   outline: none;
+  box-sizing: border-box;
+  margin: 0;
 }
 
 .editable-input:focus,
@@ -93,7 +100,7 @@
 
 .edit-buttons {
   position: absolute;
-  top: -40px;
+  top: -45px;
   right: 0;
   display: flex;
   gap: 8px;
@@ -101,6 +108,7 @@
   padding: 4px;
   border-radius: 8px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
 }
 
 .save-btn,
@@ -136,28 +144,4 @@
 .cancel-btn:hover {
   background: #c82333;
   transform: scale(1.1);
-}
-
-/* Responsividade */
-@media (max-width: 768px) {
-  .edit-overlay {
-    position: static;
-    display: none;
-  }
-  
-  .view-mode:hover .edit-overlay {
-    display: flex;
-    opacity: 1;
-    margin-top: 8px;
-    position: relative;
-    top: auto;
-    right: auto;
-    justify-content: center;
-  }
-  
-  .edit-buttons {
-    position: static;
-    justify-content: center;
-    margin-top: 8px;
-  }
 }

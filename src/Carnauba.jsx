@@ -1,4 +1,5 @@
-import React from 'react';import { useAuth } from './ADM/AuthContext';
+import React from 'react';
+import { useAuth } from './ADM/AuthContext';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LoginPopup from './components/LoginPopup';
@@ -10,6 +11,7 @@ import cesto from './assets/cesto.png';
 import decoracoes from './assets/decoracoes.png';
 import cobertura from './assets/cobertura.png';
 import bolsa from './assets/bolsa.png';
+import carnaubaImage from './assets/Carnauba.png';
 
 export default function Carnauba() {
     const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
@@ -25,7 +27,7 @@ export default function Carnauba() {
 
             <main className="main-content">
                 <section className="intro-section">
-                    <div className="intro-text" style={{ minHeight: '400px' /* Altura mínima fixa */ }}>
+                    <div className="intro-text">
                         <EditableText
                             id="carnauba_title"
                             initialText="Falando mais <br/> sobre a carnaúba"
@@ -41,15 +43,14 @@ export default function Carnauba() {
                             multiline={true}
                         />
                         <EditableText
-                            id="multiplicidades_intro_text"  /* id único */
-                            initialText="Carnaúba (<em>Copernicia prunifera</em>) é uma palmeira nativa do Brasil, especialmente do Nordeste, conhecida como árvore da vida, que é chamada assim devido aos produtos, usos e conexões culturais.<br />A carnaúba é um elemento chave para o sustento de muitos sertanejos, especialmente na cultura para as comunidades do Ceará, sendo símbolo dos estados do Ceará, Piauí e Rio Grande do Norte."
+                            id="carnauba_description"
+                            initialText="Carnaúba (Copernicia prunifera) é uma palmeira nativa do Brasil, especialmente do Nordeste, conhecida por sua cera, que é usada em diversos produtos, desde cosméticos a embalagens. É também chamada de árvore da vida devido à sua importância socioeconômica e cultural para as comunidades da Caatinga, sendo um símbolo dos estados do Ceará, Piauí e Rio Grande do Norte.<br/><br/>Falando sobre suas características, pode atingir até 15 metros de altura, possui folhas largas e cerosas, cera essa que impede a perda de água."
                             tag="p"
                             className="section-text"
-                            multiline={true}
                         />
                     </div>
                     <div className="carnauba-illustration">
-                        <img src="/Carnauba.png" alt="Ilustração da Carnaúba" />
+                        <img src={carnaubaImage} alt="Ilustração da Carnaúba" />
                     </div>
                 </section>
 
@@ -62,9 +63,9 @@ export default function Carnauba() {
                     />
                     <EditableText
                         id="multiplicidades_section_desc" /* id único */
-                        initialText="Da cera e suas folhas pode-se fazer cosméticos, medicamentos, vernizes, palmeiras, embalagens e mais.<br/>Os frutos viram alimentação animal, farinha e óleo.<br/>Sua palha vira artesanato, sua madeira é boa para construções, e suas raízes viram remédio."
-                        tag="p"
-                        className="section-text"
+                        initialText="Da cera de suas folhas pode-se fazer cosméticos, medicamentos, vernizes, polimentos, embalagens e mais.<br/>Os seus <strong>frutos</strong> viram alimentação animal, farinha e óleo.<br/>Sua <strong>palha</strong> vira artesanato, sua <strong>madeira</strong> é boa para construções, e suas <strong>raízes</strong> viram remédio."
+                        tag="div"
+                        className="multiplicidades-text"
                         multiline={true}
                     />
                 </section>
@@ -118,7 +119,7 @@ export default function Carnauba() {
                 </section>
             </main>
 
-            <Footer onLoginClick={handleLoginClick} />
+            <Footer />
 
             <LoginPopup
                 isOpen={isLoginPopupOpen}

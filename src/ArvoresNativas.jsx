@@ -22,7 +22,7 @@ export default function ArvoresNativas() {
   return (
     <div className="arvores-page">
       <Header />
-      
+
       {/* Conteúdo Principal */}
       <main className="main-content">
         {/* Seção de Introdução */}
@@ -66,7 +66,7 @@ export default function ArvoresNativas() {
               multiline={true}
             />
           </div>
-         
+
         </section>
 
         {/* Galeria de Árvores */}
@@ -146,8 +146,8 @@ export default function ArvoresNativas() {
               </div>
             </div>
 
-              {/* Pereiro */}
-              <div className="tree-card">
+            {/* Pereiro */}
+            <div className="tree-card">
               <div className="tree-image">
                 <img src="https://www.loja.sementescaicara.com/arquivos/PRODUTOS/118163611638489542/1343_G_Pereiro_97.jpg" alt="Pereiro" />
               </div>
@@ -192,7 +192,7 @@ export default function ArvoresNativas() {
 
 
             {/* Barriguda */}
-             <div className="tree-card">
+            <div className="tree-card">
               <div className="tree-image">
                 <img src="https://i.pinimg.com/736x/3e/93/87/3e93872919b86ae49bcbb14c6055b534.jpg" alt="Barriguda" />
               </div>
@@ -215,12 +215,12 @@ export default function ArvoresNativas() {
           </div>
         </section>
       </main>
-      
+
       <Footer onLoginClick={handleLoginClick} />
-      
-      <LoginPopup 
-        isOpen={isLoginPopupOpen} 
-        onClose={handleClosePopup} 
+
+      <LoginPopup
+        isOpen={isLoginPopupOpen}
+        onClose={handleClosePopup}
       />
     </div>
   );
