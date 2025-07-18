@@ -1,31 +1,13 @@
 /* ================================
-   CADASTRO DE AGENTE - MULTI-STEP
+   CADASTRO DE AGENTE - PÁGINA COMPLETA
    ================================ */
 
-.cadastro-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  padding: 0;
-  overflow: hidden; /* Evita rolagem dupla */
-}
-
-.cadastro-container {
+.cadastro-page {
+  min-height: 100vh;
   background: white;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
   font-family: 'Inter', sans-serif;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 /* Header */
@@ -82,8 +64,7 @@
 .cadastro-content {
   display: flex;
   flex: 1;
-  overflow: hidden;
-  min-height: 0; /* Para garantir que o flex funcione corretamente */
+  min-height: calc(100vh - 100px);
 }
 
 /* Sidebar */
@@ -169,7 +150,7 @@
 .step-content {
   max-width: 600px;
   margin: 0 auto;
-  padding-bottom: 2rem; /* Adiciona espaço extra na parte inferior */
+  padding-bottom: 2rem;
 }
 
 .step-content h2 {
@@ -203,7 +184,7 @@
   transition: border-color 0.3s ease;
   background: #f8f9fa;
   box-sizing: border-box;
-  color: #333; /* Cor do texto preta */
+  color: #333;
 }
 
 .form-group input:focus,
@@ -211,7 +192,7 @@
   outline: none;
   border-color: #8BC34A;
   background: white;
-  color: #333; /* Mantém a cor do texto preta no foco */
+  color: #333;
 }
 
 .form-group input::placeholder,
@@ -219,15 +200,13 @@
   color: #999;
 }
 
-/* Especificamente para o textarea */
 .form-group textarea {
   resize: vertical;
   min-height: 120px;
-  color: #333 !important; /* Força a cor do texto */
-  background: white !important; /* Força o fundo branco */
+  color: #333 !important;
+  background: white !important;
 }
 
-/* Garante que o texto seja visível em todos os estados */
 .form-group textarea:focus,
 .form-group textarea:active,
 .form-group textarea:hover {
@@ -416,93 +395,7 @@
   font-size: 0.9rem;
 }
 
-/* ================================
-   RESPONSIVIDADE
-   ================================ */
-
-@media (max-width: 768px) {
-  .sidebar {
-    width: 200px;
-  }
-  
-  .main-content {
-    padding: 1.5rem 2rem;
-    max-height: calc(100vh - 100px);
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .step-content h2 {
-    font-size: 1.5rem;
-  }
-  
-  .form-actions {
-    flex-direction: column;
-  }
-  
-  .back-button,
-  .continue-button,
-  .submit-button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 640px) {
-  .cadastro-content {
-    flex-direction: column;
-  }
-  
-  .sidebar {
-    width: 100%;
-    padding: 1rem;
-  }
-  
-  .steps-container {
-    flex-direction: row;
-    gap: 0.5rem;
-    overflow-x: auto;
-  }
-  
-  .step-item {
-    flex-direction: column;
-    text-align: center;
-    min-width: 80px;
-    padding: 0.5rem;
-  }
-  
-  .step-title {
-    font-size: 0.8rem;
-  }
-  
-  .step-line {
-    display: none;
-  }
-  
-  .main-content {
-    padding: 1rem;
-    max-height: calc(100vh - 120px); /* Ajuste para mobile */
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch; /* Para melhorar a rolagem em iOS */
-  }
-  
-  .cadastro-header {
-    padding: 1rem;
-  }
-  
-  .logo {
-    font-size: 1.2rem;
-  }
-  
-  .home-button {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
-  }
-}
-
-/* ================================
-   MODAL DE CONFIRMAÇÃO
-   ================================ */
-
+/* Modal de Confirmação */
 .confirm-modal-overlay {
   position: fixed;
   top: 0;
@@ -600,8 +493,33 @@
   }
 }
 
-/* Responsividade para modal */
+/* ================================
+   RESPONSIVIDADE
+   ================================ */
+
 @media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+  
+  .main-content {
+    padding: 1.5rem 2rem;
+  }
+  
+  .step-content h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .back-button,
+  .continue-button,
+  .submit-button {
+    width: 100%;
+  }
+  
   .confirm-modal {
     margin: 1rem;
     max-width: calc(100% - 2rem);
@@ -618,5 +536,54 @@
   .cancel-confirm-button,
   .continue-confirm-button {
     width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .cadastro-content {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+  }
+  
+  .steps-container {
+    flex-direction: row;
+    gap: 0.5rem;
+    overflow-x: auto;
+  }
+  
+  .step-item {
+    flex-direction: column;
+    text-align: center;
+    min-width: 80px;
+    padding: 0.5rem;
+  }
+  
+  .step-title {
+    font-size: 0.8rem;
+  }
+  
+  .step-line {
+    display: none;
+  }
+  
+  .main-content {
+    padding: 1rem;
+  }
+  
+  .cadastro-header {
+    padding: 1rem;
+  }
+  
+  .logo {
+    font-size: 1.2rem;
+  }
+  
+  .home-button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
 }

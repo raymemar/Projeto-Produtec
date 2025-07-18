@@ -177,6 +177,24 @@ html, body {
     font-size: 2rem;
 }
 
+/* Estilo para modo administrador */
+.main-timer.admin-mode .main-timer-circle {
+    border-color: #007bff;
+    background: #e3f2fd;
+}
+
+.main-timer.admin-mode .main-timer-fill {
+    background: conic-gradient(from 0deg,
+            #007bff 0deg,
+            #007bff 360deg) !important;
+}
+
+.main-timer.admin-mode .main-timer-text {
+    color: #007bff;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
 .timer-label {
     font-size: 1.1rem;
     color: #666;
@@ -445,8 +463,8 @@ html, body {
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    padding: 2rem;
-    background-color: #f5f5f5;
+    padding: 3rem 2rem;
+    background: #368642;
     position: relative;
     margin: 0;
 }
@@ -454,17 +472,18 @@ html, body {
 .result-content {
     background: white;
     border-radius: 20px;
-    padding: 4rem 2rem;
+    padding: 4rem 3rem;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 95%;
-    max-width: 800px;
+    width: 100%;
+    max-width: none;
+    margin: 0;
 }
 
 .result-content h1 {
-    font-size: 4rem;
+    font-size: 3rem;
     color: #2d8a56;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     font-family: 'Quity', sans-serif;
 }
 
@@ -472,12 +491,12 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 3rem 0;
+    margin: 2rem 0;
 }
 
 .score-circle-big {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background: linear-gradient(135deg, #2d8a56, #4a7c59);
     display: flex;
@@ -485,7 +504,7 @@ html, body {
     align-items: center;
     justify-content: center;
     color: white;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     box-shadow: 0 8px 25px rgba(45, 138, 86, 0.3);
 }
 
@@ -508,17 +527,26 @@ html, body {
 }
 
 .result-message {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: #666;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     line-height: 1.6;
 }
 
 .action-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.action-buttons .quiz-button {
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    min-width: 200px;
 }
 
 .restart-button {
@@ -618,8 +646,8 @@ html, body {
 
     .result-content {
         padding: 2rem 1rem;
-        margin: 1rem;
-        width: calc(100% - 2rem);
+        margin: 0;
+        width: 100%;
     }
 
     .result-content h1 {
@@ -627,8 +655,8 @@ html, body {
     }
 
     .score-circle-big {
-        width: 120px;
-        height: 120px;
+        width: 150px;
+        height: 150px;
     }
 
     .score-number {
@@ -637,6 +665,12 @@ html, body {
 
     .action-buttons {
         flex-direction: column;
+        gap: 1rem;
+    }
+
+    .action-buttons .quiz-button {
+        width: 100%;
+        min-width: auto;
     }
 
     /* Responsividade para o timer principal */

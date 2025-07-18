@@ -94,22 +94,34 @@ const EditableQuiz = ({ pergunta, opcoes, resposta, onSave, perguntaIndex }) => 
                     </select>
                 </div>
 
-                <div className="edit-buttons">
-                    <button onClick={handleSave} className="save-btn">
-                        Salvar
-                    </button>
-                    <button onClick={handleCancel} className="cancel-btn">
-                        Cancelar
-                    </button>
+                <div className="edit-buttons-container">
+                    <div className="edit-buttons">
+                        <button 
+                            onClick={handleSave} 
+                            className="save-btn"
+                            type="button"
+                            style={{ background: '#28a745', color: 'white', padding: '15px 30px', fontSize: '16px', fontWeight: 'bold' }}
+                        >
+                            💾 Salvar Alterações
+                        </button>
+                        <button 
+                            onClick={handleCancel} 
+                            className="cancel-btn"
+                            type="button"
+                            style={{ background: '#dc3545', color: 'white', padding: '15px 30px', fontSize: '16px', fontWeight: 'bold' }}
+                        >
+                            ❌ Cancelar Edição
+                        </button>
+                    </div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="question-container">
+        <div className="question-container" style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', color: '#333' }}>
             <div className="question-header">
-                <h3>{pergunta}</h3>
+                <h3 style={{ color: '#333', fontWeight: '600' }}>{pergunta}</h3>
                 <button
                     onClick={() => setIsEditing(true)}
                     className="edit-question-btn"
@@ -119,7 +131,7 @@ const EditableQuiz = ({ pergunta, opcoes, resposta, onSave, perguntaIndex }) => 
             </div>
             <div className="options-container">
                 {opcoes.map((opcao, i) => (
-                    <div key={i} className="option-display">
+                    <div key={i} className="option-display" style={{ color: '#333' }}>
                         {opcao}
                         {opcao === resposta && (
                             <span className="correct-indicator">✓ Correta</span>

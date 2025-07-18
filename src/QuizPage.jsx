@@ -119,6 +119,11 @@ function QuizPage() {
 
     // Atualiza o tempo e bloqueia respostas quando tempo expira
     useEffect(() => {
+        // Se está autenticado como admin, não roda o timer
+        if (isAuthenticated) {
+            return;
+        }
+        
         if (tempo > 0 && !mostrarResposta && !tempoExpirado) {
             const timer = setTimeout(() => setTempo((t) => t - 1), 1000);
             return () => clearTimeout(timer);
@@ -129,7 +134,7 @@ function QuizPage() {
                 proximo();
             }, 2000);
         }
-    }, [tempo, mostrarResposta, tempoExpirado]);
+    }, [tempo, mostrarResposta, tempoExpirado, isAuthenticated]);
 
     // Envia a resposta e computa o score
     const enviar = () => {
@@ -234,13 +239,13 @@ function QuizPage() {
                     </div>
                     <div className="quiz-image">
                         <div className="main-timer-container">
-                            <div className={`main-timer ${tempo <= 10 ? 'timer-warning' : ''} ${tempoExpirado ? 'timer-expired' : ''}`}>
+                            <div className={`main-timer ${tempo <= 10 ? 'timer-warning' : ''} ${tempoExpirado ? 'timer-expired' : ''} ${isAuthenticated ? 'admin-mode' : ''}`}>
                                 <div className="main-timer-circle">
                                     <div
                                         className="main-timer-fill"
                                         style={{
-                                            '--progress-angle': `${((30 - tempo) / 30) * 360}deg`,
-                                            '--timer-color': (() => {
+                                            '--progress-angle': isAuthenticated ? '0deg' : `${((30 - tempo) / 30) * 360}deg`,
+                                            '--timer-color': isAuthenticated ? '#007bff' : (() => {
                                                 const progress = (30 - tempo) / 30; // 0 = início, 1 = fim
                                                 if (progress <= 0.6) {
                                                     // Verde até 60% do tempo (18 segundos passados)
@@ -256,13 +261,13 @@ function QuizPage() {
                                         }}
                                     ></div>
                                     <div className="main-timer-text">
-                                        {tempoExpirado ? 'Tempo!' : tempo}
+                                        {isAuthenticated ? 'ADM' : (tempoExpirado ? 'Tempo!' : tempo)}
                                     </div>
                                 </div>
                             </div>
                             <EditableText
                                 id="timer_label"
-                                initialText="Tempo restante"
+                                initialText={isAuthenticated ? "Modo Administrador" : "Tempo restante"}
                                 tag="p"
                                 className="timer-label"
                             />
