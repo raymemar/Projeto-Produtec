@@ -133,8 +133,38 @@ b {
   border-radius: 10px;
   padding: 2rem;
   display: flex;
+  flex-direction: column;
   gap: 2rem;
+}
+
+.agentes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.add-agente-btn {
+  background: linear-gradient(135deg, #c8dc6d, #a8cc1a);
+  color: #2d8a56;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(200, 220, 109, 0.3);
+}
+
+.add-agente-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(200, 220, 109, 0.4);
+  background: #a8cc1a;
 }
 
 .agentes-container {
@@ -142,8 +172,39 @@ b {
   flex-wrap: wrap;
   gap: 2rem;
   margin: 0 auto;
-  padding: 0 3rem;
+  padding: 0;
   justify-content: left;
+}
+
+.loading-message,
+.error-message,
+.empty-agentes {
+  text-align: center;
+  padding: 2rem;
+  color: #c8dc6d;
+}
+
+.error-message {
+  color: #ff6b6b;
+}
+
+.retry-btn,
+.empty-add-btn {
+  background: linear-gradient(135deg, #c8dc6d, #a8cc1a);
+  color: #2d8a56;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+.retry-btn:hover,
+.empty-add-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(200, 220, 109, 0.3);
 }
 
 .agentes-title {
@@ -163,6 +224,34 @@ b {
   align-items: stretch;
   padding: 0;
   width: 100%;
+  position: relative;
+}
+
+.delete-agente-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 107, 107, 0.9);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.delete-agente-btn:hover {
+  background: #ff4757;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
 }
 
 .agente-card:hover {

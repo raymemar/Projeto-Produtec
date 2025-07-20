@@ -195,4 +195,50 @@ export class AgentesService {
       };
     }
   }
+
+  // Limpar agentes inválidos ou de teste
+  static async limparAgentesInvalidos() {
+    try {
+      const agentesRef = ref(database, 'agentes');
+      const snapshot = await get(agentesRef);
+      
+      if (snapshot.exists()) {
+        const agentesToDelete = [];
+        snapshot.forEach((childSnapshot) => {
+          const agente = childSnapshot.val();
+          // Verificar se é um agente inválido (sem dados essenciais ou de teste)
+          if (!agente.nome || !agente.descricao || 
+              agente.nome.toLowerCase().includes('test') ||
+              agente.nome.toLowerCase().includes('nik') ||
+              agente.nome.length < 2) {
+            agentesToDelete.push(childSnapshot.key);
+          }
+        });
+
+        // Deletar agentes inválidos
+        for (const id of agentesToDelete) {
+          await this.excluirAgente(id);
+        }
+
+        return {
+          success: true,
+          message: `${agentesToDelete.length} agente(s) inválido(s) removido(s)`,
+          removidos: agentesToDelete.length
+        };
+      }
+
+      return {
+        success: true,
+        message: 'Nenhum agente inválido encontrado',
+        removidos: 0
+      };
+    } catch (error) {
+      console.error('Erro ao limpar agentes inválidos:', error);
+      return {
+        success: false,
+        message: 'Erro ao limpar agentes inválidos',
+        error: error.message
+      };
+    }
+  }
 }

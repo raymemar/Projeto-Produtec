@@ -11,55 +11,56 @@ import "./QuizPage.css";
 const perguntas = [
     {
         pergunta: "1. Qual é a árvore símbolo da Caatinga, conhecida por sua resistência à seca e casca esbranquiçada?",
-        opcoes: ["A: Aroeira", "B: Juazeiro", "C: Mandacaru", "D: Catingueira"],
-        resposta: "D: Catingueira",
+        opcoes: ["A: Catingueira", "B: Aroeira", "C: Mandacaru", "D: Juazeiro"],
+        resposta: "A: Catingueira",
     },
     {
         pergunta: "2. Qual dessas árvores possui frutos comestíveis e é muito utilizada na alimentação do sertanejo?",
-        opcoes: ["A: Umbuzeiro", "B: Jurema-preta", "C: Angico", "D: Pau-d'arco"],
-        resposta: "A: Umbuzeiro",
+        opcoes: ["A: Angico", "B: Umbuzeiro", "C: Pau-d'arco", "D: Jurema-preta"],
+        resposta: "B: Umbuzeiro",
     },
     {
         pergunta: "3. Qual espécie é famosa por suas flores amarelas e é usada na medicina tradicional?",
-        opcoes: ["A: Catingueira", "B: Jurema-branca", "C: Marmeleiro", "D: Imburana"],
-        resposta: "C: Marmeleiro",
+        opcoes: ["A: Marmeleiro", "B: Jurema-branca", "C: Catingueira", "D: Imburana"],
+        resposta: "A: Marmeleiro",
     },
     {
         pergunta: "4. Qual árvore é conhecida por sua madeira resistente e uso em cercas e construções rurais?",
-        opcoes: ["A: Pereiro", "B: Faveleira", "C: Mulungu", "D: Sabiá"],
-        resposta: "A: Pereiro",
+        opcoes: ["A: Mulungu", "B: Pereiro", "C: Faveleira", "D: Sabiá"],
+        resposta: "B: Pereiro",
     },
     {
         pergunta: "5. Qual árvore é conhecida por produzir uma resina medicinal chamada 'breu'?",
-        opcoes: ["A: Barriguda (Cavanillesia arborea)", "B: Aroeira (Schinus terebinthifolius)", "C: Angico (Anadenanthera colubrina)", "D: Jucá (Libidibia ferrea)"],
-        resposta: "A: Barriguda (Cavanillesia arborea)",
+        opcoes: ["A: Angico", "B: Jucá", "C: Aroeira", "D: Barriguda"],
+        resposta: "D: Barriguda",
     },
     {
         pergunta: "6. Qual dessas árvores possui espinhos e é importante para a apicultura na Caatinga?",
-        opcoes: ["A: Jurema-preta (Mimosa tenuiflora)", "B: Mandacaru (Cereus jamacaru)", "C: Xique-xique (Pilosocereus gounellei)", "D: Macambira (Bromelia laciniosa)"],
-        resposta: "A: Jurema-preta (Mimosa tenuiflora)",
+        opcoes: ["A: Mandacaru", "B: Jurema-preta", "C: Xique-xique", "D: Macambira"],
+        resposta: "B: Jurema-preta",
     },
     {
         pergunta: "7. Qual dessas espécies é considerada indicadora de água subterrânea?",
-        opcoes: ["A: Juazeiro", "B: Oiticica", "C: Baraúna", "D: Quixabeira"],
-        resposta: "A: Juazeiro",
+        opcoes: ["A: Oiticica", "B: Juazeiro", "C: Baraúna", "D: Quixabeira"],
+        resposta: "B: Juazeiro",
     },
     {
         pergunta: "8. Qual árvore tem um tronco inchado que armazena água, adaptação à seca?",
-        opcoes: ["A: Barriguda (Cavanillesia arborea)", "B: Mandacaru (Cereus jamacaru)", "C: Juazeiro (Ziziphus joazeiro)", "D: Aroeira (Schinus terebinthifolius)"],
-        resposta: "A: Barriguda (Cavanillesia arborea)",
+        opcoes: ["A: Juazeiro", "B: Barriguda", "C: Mandacaru", "D: Aroeira"],
+        resposta: "B: Barriguda",
     },
     {
         pergunta: "9. Qual dessas árvores é típica da Caatinga e fornece sombra para o gado?",
-        opcoes: ["A: Sabiá (Mimosa caesalpiniifolia)", "B: Jucá (Libidibia ferrea)", "C: Angico (Anadenanthera colubrina)", "D: Mulungu (Erythrina velutina)"],
-        resposta: "A: Sabiá (Mimosa caesalpiniifolia)",
+        opcoes: ["A: Jucá", "B: Sabiá", "C: Angico", "D: Mulungu"],
+        resposta: "B: Sabiá",
     },
     {
         pergunta: "10. Qual árvore possui frutos em forma de vagem e é usada como forragem?",
-        opcoes: ["A: Algaroba (Prosopis juliflora)", "B: Jurema-branca (Piptadenia stipulacea)", "C: Catingueira (Poincianella pyramidalis)", "D: Imburana (Commiphora leptophloeos)"],
-        resposta: "A: Algaroba (Prosopis juliflora)",
+        opcoes: ["A: Jurema-branca", "B: Algaroba", "C: Catingueira", "D: Imburana"],
+        resposta: "B: Algaroba",
     },
 ];
+
 
 function QuizPage() {
     const [indice, setIndice] = useState(0);

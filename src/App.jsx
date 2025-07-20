@@ -8,6 +8,7 @@ import Carnauba from './Carnauba';
 import ArvoresNativas from './ArvoresNativas';
 import Agentes from './Agentes';
 import QuizPage from './QuizPage';
+import CadastroAgentePage from './CadastroAgentePage';
 import GerenciadorAgentes from './components/GerenciadorAgentes';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
   <Route path="/arvores-nativas" element={<ArvoresNativas />} />
   <Route path='/agentes' element={<Agentes />} />
   <Route path='/quiz' element={<QuizPage />} />
+  <Route path='/cadastro' element={<CadastroAgentePage />} />
   <Route 
     path="/gerenciador-agentes" 
     element={

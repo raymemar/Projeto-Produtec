@@ -215,7 +215,7 @@ html, body {
 .quiz-section h2 {
     font-size: 2rem;
     margin-bottom: 2rem;
-    color: #f0f57d;
+    color: #0fb356;
     font-family: 'Quity', sans-serif !important;
 }
 
@@ -558,15 +558,11 @@ html, body {
 }
 
 .home-button {
-    background: #4ecdc4;
+    color: #007bff;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-}
-
-.home-button:hover {
-    background: #45b7aa;
 }
 
 /* ================================
@@ -587,7 +583,7 @@ html, body {
 .quiz-button.disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    background-color: #ccc;
+    background-color: #4d858f;
 }
 
 .quiz-button:disabled {

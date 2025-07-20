@@ -4,6 +4,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import LoginPopup from './components/LoginPopup';
 import EditableText from './components/EditableText';
+import AddTreeForm from './components/AddTreeForm';
+import contentManager from './utils/contentManager';
+import arvoresService from './services/arvoresService';
 import './ArvoresNativas.css';
 
 // Importações de imagens
@@ -12,12 +15,133 @@ import AngicoVermelho from './assets/AngicoVermelho.jpg';
 import IpeRoxo from './assets/IpeRoxo.png';
 
 export default function ArvoresNativas() {
+  console.log('ArvoresNativas componente carregado');
+  console.log('arvoresService:', arvoresService);
+  
   const [isLoginPopupOpen, setIsLoginPopupOpen] = React.useState(false);
+  const [isAddTreeFormOpen, setIsAddTreeFormOpen] = React.useState(false);
+  const [customTrees, setCustomTrees] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
   const { isAuthenticated, logout } = useAuth();
+
+  // Carregar árvores do Firebase
+  React.useEffect(() => {
+    loadArvores();
+  }, []);
+
+  const loadArvores = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      
+      // Tentar carregar do Firebase
+      const arvores = await arvoresService.getAllArvores();
+      
+      // Se não houver árvores no Firebase, tentar migrar do localStorage
+      if (arvores.length === 0) {
+        console.log('Nenhuma árvore no Firebase, tentando migrar do localStorage...');
+        const migratedArvores = await arvoresService.migrateFromLocalStorage();
+        setCustomTrees(migratedArvores);
+      } else {
+        setCustomTrees(arvores);
+      }
+    } catch (err) {
+      console.error('Erro ao carregar árvores:', err);
+      setError('Erro ao carregar árvores. Usando dados locais como fallback.');
+      
+      // Fallback para localStorage em caso de erro
+      const localTrees = contentManager.loadTrees();
+      setCustomTrees(localTrees);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleLoginClick = () => setIsLoginPopupOpen(true);
   const handleLogoutClick = () => logout();
   const handleClosePopup = () => setIsLoginPopupOpen(false);
+
+  const handleAddTree = async (newTreeData) => {
+    console.log('handleAddTree chamado com:', newTreeData);
+    try {
+      setError(null);
+      
+      // Validar dados
+      console.log('Validando dados...');
+      const validation = arvoresService.validateArvoreData(newTreeData);
+      console.log('Resultado da validação:', validation);
+      
+      if (!validation.isValid) {
+        alert('Dados inválidos:\n' + validation.errors.join('\n'));
+        return;
+      }
+
+      // Adicionar no Firebase
+      console.log('Tentando adicionar no Firebase...');
+      const newTree = await arvoresService.addArvore({
+        name: newTreeData.name,
+        description: newTreeData.description,
+        imageUrl: newTreeData.imageUrl
+      });
+      console.log('Árvore adicionada no Firebase:', newTree);
+
+      // Atualizar estado local
+      setCustomTrees(prevTrees => [newTree, ...prevTrees]);
+      
+      // Backup no localStorage
+      await arvoresService.backupToLocalStorage();
+      
+      console.log('Árvore adicionada com sucesso:', newTree);
+      alert('Árvore adicionada com sucesso!');
+    } catch (err) {
+      console.error('Erro ao adicionar árvore:', err);
+      setError('Erro ao salvar árvore. Tente novamente.');
+      alert('Erro ao salvar árvore: ' + err.message);
+      
+      // Fallback para localStorage
+      const treeWithId = { ...newTreeData, id: Date.now() };
+      const updatedTrees = [treeWithId, ...customTrees];
+      setCustomTrees(updatedTrees);
+      contentManager.saveTrees(updatedTrees);
+      contentManager.markUpdate();
+    }
+  };
+
+  const handleDeleteTree = async (treeId) => {
+    if (!window.confirm('Tem certeza que deseja remover esta árvore?')) {
+      return;
+    }
+
+    try {
+      setError(null);
+      
+      // Remover do Firebase
+      await arvoresService.deleteArvore(treeId);
+      
+      // Atualizar estado local
+      setCustomTrees(prevTrees => prevTrees.filter(tree => tree.id !== treeId));
+      
+      // Backup no localStorage
+      await arvoresService.backupToLocalStorage();
+      
+      console.log('Árvore removida com sucesso');
+    } catch (err) {
+      console.error('Erro ao remover árvore:', err);
+      setError('Erro ao remover árvore. Tente novamente.');
+      
+      // Fallback para localStorage
+      const updatedTrees = customTrees.filter(tree => tree.id !== treeId);
+      setCustomTrees(updatedTrees);
+      contentManager.saveTrees(updatedTrees);
+      contentManager.markUpdate();
+    }
+  };
+
+  const handleImageError = (e) => {
+    e.target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik02NiA4NEMzNi44NjI5IDg0IDEzLjUgMTA3LjM2MyAxMy41IDEzNi41UzM2Ljg2MjkgMTg5IDY2IDE4OSA4My44NjI5IDE2NS42MzcgODMuODYyOSAxMzYuNVM2MC42MzcxIDg0IDY2IDg0WiIgZmlsbD0iI0Q5RDlEOSIvPgo8cGF0aCBkPSJNMTE2IDEwMkMxMDIuNzQ1IDEwMiA5MiAxMTIuNzQ1IDkyIDEyNlM3Mi4yNTUgMTUwIDg2IDE1MFMxMDAgMTM5LjI1NSAxMDAgMTI2IDEwOS4yNTUgMTAyIDExNiAxMDJaIiBmaWxsPSIjRDlEOUQ5Ii8+Cjx0ZXh0IHg9IjEwMCIgeT0iMTEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjU2NTY1IiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiPkltYWdlbSBuJiM5NzE7byBlbmNvbnRyYWRhPC90ZXh0Pgo8L3N2Zz4K';
+    e.target.alt = 'Imagem não encontrada';
+  };
 
   return (
     <div className="arvores-page">
@@ -57,16 +181,15 @@ export default function ArvoresNativas() {
                 muitas plantas perdem suas folhas para conservar água. Com um
                 clima categoriza como semiárido, plantas xerófilas (resistente à
                 seca), como cactos, árvores de troncos retorcidos e uma
-                biodiversidade exclusiv, já que muitas
-                espécies só existem no nosso bioma, como o tatu-bola,
-                a ararinha-azul (extinta na natureza) e a cobra-cascavel, a
+                biodiversidade exclusiv, já que muitas
+                espécies só existem no nosso bioma, como o tatu-bola,
+                a ararinha-azul (extinta na natureza) e a cobra-cascavel, a
                 caatinga se torna foco de preservação ambiental ."
               tag="p"
               className="section-text"
               multiline={true}
             />
           </div>
-
         </section>
 
         {/* Galeria de Árvores */}
@@ -78,6 +201,15 @@ export default function ArvoresNativas() {
               tag="h2"
               className="arvores-title"
             />
+            {isAuthenticated && (
+              <button 
+                onClick={() => setIsAddTreeFormOpen(true)} 
+                className="add-tree-btn"
+                title="Adicionar nova árvore nativa"
+              >
+                🌳 Adicionar Árvore
+              </button>
+            )}
           </div>
           <div className="trees-container">
             {/* Ipê Roxo */}
@@ -94,7 +226,7 @@ export default function ArvoresNativas() {
                 />
                 <EditableText
                   id="ipe_description"
-                  initialText=" O ipê-roxo possui tronco reto ou levemente tortuoso, com casca grossa e fissurada de coloração marrom-acinzentada, podendo atingir até 30 metros de altura. Suas folhas são compostas e digitada, verde-escuras e caducas, caindo no inverno. Entre maio e agosto, a árvore se enche de belas flores roxas ou rosas, dispostas em cachos, criando um espetáculo visual quando a árvore está quase sem folhas. Os frutos são cápsulas longas (vagens) que liberam sementes aladas quando maduras. Sua madeira é extremamente dura, densa e durável, muito valorizada na construção civil e marcenaria. "
+                  initialText=" O ipê-roxo possui tronco reto ou levemente tortuoso, com casca grossa e fissurada de coloração marrom-acinzentada, podendo atingir até 30 metros de altura. Suas folhas são compostas e digitada, verde-escuras e caducas, caindo no inverno. Entre maio e agosto, a árvore se enche de belas flores roxas ou rosas, dispostas em cachos, criando um espetáculo visual quando a árvore está quase sem folhas. Os frutos são cápsulas longas (vagens) que liberam sementes aladas quando maduras. Sua madeira é extremamente dura, densa e durável, muito valorizada na construção civil e marcenaria. "
                   tag="p"
                   className="tree-description"
                   multiline={true}
@@ -138,7 +270,7 @@ export default function ArvoresNativas() {
                 />
                 <EditableText
                   id="angico_description"
-                  initialText=" O Angico-Vermelho apresenta um tronco cilíndrico ou tortuoso com 40-60 cm de diâmetro, cuja casca varia de quase lisa e clara a rugosa ou muito fissurada e escura. Suas folhas são compostas bipinadas  e possuem coloração verde-escuro. As flores são pequenas, amarelas com manchas brancas, florescendo entre setembro e novembro, período em que a planta está com poucas folhas. Os frutos são vagens (12-15 cm de comprimento) com 5-10 sementes, de superfície áspera e cor marrom, amadurecendo de agosto a novembro. A madeira é muito pesada, densa, não elástica e de grande durabilidade."
+                  initialText=" O Angico-Vermelho apresenta um tronco cilíndrico ou tortuoso com 40-60 cm de diâmetro, cuja casca varia de quase lisa e clara a rugosa ou muito fissurada e escura. Suas folhas são compostas bipinadas  e possuem coloração verde-escuro. As flores são pequenas, amarelas com manchas brancas, florescendo entre setembro e novembro, período em que a planta está com poucas folhas. Os frutos são vagens (12-15 cm de comprimento) com 5-10 sementes, de superfície áspera e cor marrom, amadurecendo de agosto a novembro. A madeira é muito pesada, densa, não elástica e de grande durabilidade."
                   tag="p"
                   className="tree-description"
                   multiline={true}
@@ -190,7 +322,6 @@ export default function ArvoresNativas() {
               </div>
             </div>
 
-
             {/* Barriguda */}
             <div className="tree-card">
               <div className="tree-image">
@@ -212,6 +343,49 @@ export default function ArvoresNativas() {
                 />
               </div>
             </div>
+
+            {/* Árvores customizadas */}
+            {error && (
+              <div className="error-message">
+                ⚠️ {error}
+              </div>
+            )}
+            
+            {isLoading ? (
+              <div className="loading-message">
+                🌱 Carregando árvores...
+              </div>
+            ) : (
+              customTrees.map((tree) => (
+                <div key={tree.id} className="tree-card">
+                  {isAuthenticated && (
+                    <button 
+                      onClick={() => handleDeleteTree(tree.id)}
+                      className="delete-tree-btn"
+                      title="Remover árvore"
+                    >
+                      ✕
+                    </button>
+                  )}
+                  
+                  <div className="tree-image">
+                    <img 
+                      src={tree.imageUrl} 
+                      alt={tree.name}
+                      onError={handleImageError}
+                    />
+                  </div>
+                  
+                  <div className="tree-info">
+                    <h3 className="tree-name">{tree.name}</h3>
+                    
+                    <div className="tree-description">
+                      <p>{tree.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </section>
       </main>
@@ -221,6 +395,12 @@ export default function ArvoresNativas() {
       <LoginPopup
         isOpen={isLoginPopupOpen}
         onClose={handleClosePopup}
+      />
+
+      <AddTreeForm
+        isOpen={isAddTreeFormOpen}
+        onClose={() => setIsAddTreeFormOpen(false)}
+        onAddTree={handleAddTree}
       />
     </div>
   );

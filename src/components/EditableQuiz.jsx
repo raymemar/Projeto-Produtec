@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../ADM/AuthContext';
 import './EditableQuiz.css';
 
-const EditableQuiz = ({ pergunta, opcoes, resposta, onSave, perguntaIndex }) => {
+const EditableQuiz = ({ pergunta, opcoes, resposta, onSave, perguntaIndex, onNext, onPrevious, totalPerguntas }) => {
     const { isAuthenticated } = useAuth();
     const [isEditing, setIsEditing] = useState(false);
     const [editedPergunta, setEditedPergunta] = useState(pergunta);
@@ -102,7 +102,7 @@ const EditableQuiz = ({ pergunta, opcoes, resposta, onSave, perguntaIndex }) => 
                             type="button"
                             style={{ background: '#28a745', color: 'white', padding: '15px 30px', fontSize: '16px', fontWeight: 'bold' }}
                         >
-                            💾 Salvar Alterações
+                             Salvar 
                         </button>
                         <button 
                             onClick={handleCancel} 
@@ -110,7 +110,7 @@ const EditableQuiz = ({ pergunta, opcoes, resposta, onSave, perguntaIndex }) => 
                             type="button"
                             style={{ background: '#dc3545', color: 'white', padding: '15px 30px', fontSize: '16px', fontWeight: 'bold' }}
                         >
-                            ❌ Cancelar Edição
+                            Cancelar
                         </button>
                     </div>
                 </div>
@@ -138,6 +138,62 @@ const EditableQuiz = ({ pergunta, opcoes, resposta, onSave, perguntaIndex }) => 
                         )}
                     </div>
                 ))}
+            </div>
+            
+            {/* Botões de navegação */}
+            <div className="navigation-buttons" style={{ 
+                display: 'flex', 
+                justifyContent: 'space-between', 
+                alignItems: 'center',
+                marginTop: '20px', 
+                padding: '15px 0',
+                borderTop: '1px solid #ddd'
+            }}>
+                <button
+                    onClick={onPrevious}
+                    disabled={perguntaIndex === 0}
+                    className="nav-btn prev-btn"
+                    style={{
+                        background: perguntaIndex === 0 ? '#ccc' : '#637d94ff',
+                        color: 'white',
+                        border: 'none',
+                        padding: '12px 24px',
+                        borderRadius: '6px',
+                        cursor: perguntaIndex === 0 ? 'not-allowed' : 'pointer',
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        transition: 'all 0.3s ease'
+                    }}
+                >
+                    ← Pergunta Anterior
+                </button>
+                
+                <span style={{ 
+                    color: '#666', 
+                    fontSize: '14px', 
+                    fontWeight: '500' 
+                }}>
+                    {perguntaIndex + 1} de {totalPerguntas}
+                </span>
+                
+                <button
+                    onClick={onNext}
+                    disabled={perguntaIndex === totalPerguntas - 1}
+                    className="nav-btn next-btn"
+                    style={{
+                        background: perguntaIndex === totalPerguntas - 1 ? '#ccc' : '#007bff',
+                        color: 'black',
+                        border: 'none',
+                        padding: '12px 24px',
+                        borderRadius: '6px',
+                        cursor: perguntaIndex === totalPerguntas - 1 ? 'not-allowed' : 'pointer',
+                        fontSize: '14px',
+                        fontWeight: '600',
+                        transition: 'all 0.3s ease'
+                    }}
+                >
+                    Próxima Pergunta →
+                </button>
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ class ContentManager {
   constructor() {
     this.prefix = 'produtec_content_';
     this.galleryKey = 'produtec_gallery';
+    this.treesKey = 'produtec_trees';
   }
 
   // Salvar texto editável
@@ -53,6 +54,32 @@ class ContentManager {
     }
   }
 
+  // Salvar árvores nativas
+  saveTrees(trees) {
+    try {
+      localStorage.setItem(this.treesKey, JSON.stringify(trees));
+      return true;
+    } catch (error) {
+      console.error('Erro ao salvar árvores:', error);
+      return false;
+    }
+  }
+
+  // Carregar árvores nativas
+  loadTrees() {
+    try {
+      const saved = localStorage.getItem(this.treesKey);
+      if (saved) {
+        return JSON.parse(saved);
+      }
+      // Retornar array vazio se não houver dados salvos (as árvores padrão ficam hardcoded na página)
+      return [];
+    } catch (error) {
+      console.error('Erro ao carregar árvores:', error);
+      return [];
+    }
+  }
+
   // Galeria padrão
   getDefaultGallery() {
     return [
@@ -85,6 +112,7 @@ class ContentManager {
     const data = {
       texts: {},
       gallery: this.loadGallery(),
+      trees: this.loadTrees(),
       exportDate: new Date().toISOString()
     };
 
@@ -113,6 +141,10 @@ class ContentManager {
         this.saveGallery(data.gallery);
       }
 
+      if (data.trees) {
+        this.saveTrees(data.trees);
+      }
+
       return true;
     } catch (error) {
       console.error('Erro ao importar dados:', error);
@@ -136,6 +168,9 @@ class ContentManager {
       // Remover galeria
       localStorage.removeItem(this.galleryKey);
 
+      // Remover árvores
+      localStorage.removeItem(this.treesKey);
+
       return true;
     } catch (error) {
       console.error('Erro ao limpar dados:', error);
@@ -157,10 +192,12 @@ class ContentManager {
     }
 
     const gallery = this.loadGallery();
+    const trees = this.loadTrees();
     
     return {
       editedTexts: textCount,
       totalPhotos: gallery.length,
+      totalTrees: trees.length,
       dataSize: totalSize,
       lastUpdate: this.getLastUpdateTime()
     };
