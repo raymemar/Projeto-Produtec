@@ -1,9 +1,11 @@
 @media (min-width: 1200px) {
   .cadastro-content {
-    max-width: 1200px;
-    margin: 0 auto;
+    width: 100vw;
+    max-width: none;
+    margin: 0;
     display: flex;
     min-height: 700px;
+    box-sizing: border-box;
   }
   .sidebar {
     width: 300px;
@@ -16,6 +18,12 @@
   .step-content h2 {
     font-size: 2.4rem;
     margin-bottom: 2rem;
+  }
+  .step-content {
+    max-width: none;
+    width: 100%;
+    margin: 0;
+    padding-bottom: 2rem;
   }
   .form-group input,
   .form-group textarea {
