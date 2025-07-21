@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './CadastroAgentePage.css';
+import { AgentesService } from '../services/agentesService';
 
 function CadastroAgentePage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -20,6 +21,7 @@ function CadastroAgentePage() {
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const navigate = useNavigate();
 
   const steps = [
     { id: 1, title: 'Dados Iniciais' },
@@ -91,12 +93,23 @@ function CadastroAgentePage() {
     }
   };
 
-  const confirmSubmit = () => {
-    // Aqui você pode adicionar a lógica para enviar os dados para o servidor
-    console.log('Dados do formulário:', formData);
-    // Simular envio
-    setIsSubmitted(true);
-    setShowConfirmModal(false);
+  const confirmSubmit = async () => {
+    try {
+      // Envia os dados para o banco de dados
+      const resultado = await AgentesService.cadastrarAgente(formData);
+      if (resultado.success) {
+        setIsSubmitted(true);
+        setShowConfirmModal(false);
+        // Redireciona para página de agentes após sucesso
+        setTimeout(() => {
+          navigate('/agentes');
+        }, 1200);
+      } else {
+        alert(resultado.message || 'Erro ao cadastrar agente.');
+      }
+    } catch (error) {
+      alert('Erro ao cadastrar agente. Tente novamente.');
+    }
   };
 
   const confirmNextStep = () => {
@@ -273,6 +286,7 @@ function CadastroAgentePage() {
 
   // Modal de confirmação para etapas 1 e 2
   const showStepConfirmModal = showConfirmModal && (currentStep === 1 || currentStep === 2);
+  const showSubmitConfirmModal = showConfirmModal && currentStep === steps.length;
 
   return (
     <div className="cadastro-page">
@@ -338,6 +352,24 @@ function CadastroAgentePage() {
                 </button>
                 <button onClick={confirmNextStep} className="continue-confirm-button">
                   Continuar mesmo assim
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {showSubmitConfirmModal && (
+        <div className="confirm-modal-overlay" onClick={cancelConfirmModal}>
+          <div className="confirm-modal" onClick={e => e.stopPropagation()}>
+            <div className="confirm-modal-content">
+              <h3>Confirmação</h3>
+              <p>Confira atentamente suas informações antes de enviar. Após essa etapa, não será possível fazer alterações.</p>
+              <div className="confirm-modal-actions">
+                <button onClick={cancelConfirmModal} className="cancel-confirm-button">
+                  Revisar informações
+                </button>
+                <button onClick={confirmSubmit} className="continue-confirm-button">
+                  Enviar cadastro
                 </button>
               </div>
             </div>
