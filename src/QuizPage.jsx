@@ -308,6 +308,9 @@ function QuizPage() {
                             resposta={pergunta.resposta}
                             onSave={handleSaveQuestion}
                             perguntaIndex={indice}
+                            onNext={proximo}
+                            onPrevious={() => setIndice((i) => Math.max(i - 1, 0))}
+                            totalPerguntas={perguntasEditaveis.length}
                         />
                     ) : (
                         <div className="question-container">
