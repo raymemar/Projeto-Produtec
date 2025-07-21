@@ -85,21 +85,21 @@ class ContentManager {
     return [
       {
         id: 1,
-        src: '/foto1.jpg',
+        src: '/src/assets/foto1.jpg',
         alt: 'Apresentação do projeto',
         title: 'Apresentação do Projeto PRODUTEC',
         description: 'Produção de caderno de campo, elemento de suma importância para a avaliação do projeto'
       },
       {
         id: 2,
-        src: '/foto2.png',
+        src: '/src/assets/foto2.png',
         alt: 'Equipe com a bandeira',
         title: 'Equipe PRODUTEC na Feira',
         description: 'Equipe do projeto PRODUTEC apresentando os resultados da pesquisa sobre carnaúba'
       },
       {
         id: 3,
-        src: '/foto3.jpg',
+        src: '/src/assets/foto3.jpg',
         alt: 'Alunos com o caderno',
         title: 'Desenvolvimento do Caderno de Campo',
         description: 'Estudantes desenvolvendo atividades práticas de campo para coleta de dados'
