@@ -274,16 +274,16 @@ const GerenciadorAgentes = () => {
                                                 <button
                                                     onClick={() => {
                                                         const detalhes = `
-Nome: ${agente.nome}
-Email: ${agente.email}
-Telefone: ${agente.telefone}
-Série: ${agente.serie}
-Escola: ${agente.escola}
-Cidade: ${agente.cidadeEscola}
-Motivação: ${agente.motivacao}
-Cadastrado em: ${formatarData(agente.dataCadastro)}
-Status: ${getStatusText(agente.status)}
-                          `;
+                                                            Nome: ${agente.nome}
+                                                            Email: ${agente.email}
+                                                            Telefone: ${agente.telefone}
+                                                            Série: ${agente.serie}
+                                                            Escola: ${agente.escola}
+                                                            Cidade: ${agente.cidadeEscola}
+                                                            Motivação: ${agente.motivacao}
+                                                            Cadastrado em: ${formatarData(agente.dataCadastro)}
+                                                            Status: ${getStatusText(agente.status)}
+                                                                                    `;
                                                         alert(detalhes);
                                                     }}
                                                     className="action-btn info-btn"

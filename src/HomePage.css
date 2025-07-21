@@ -232,72 +232,68 @@ b {
     padding: 40px 15px;
   }
 }
-
 /* ================================
-   RESPONSIVIDADE
+   TELAS GRANDES (DESKTOPS/MONITORES)
    ================================ */
-@media (max-width: 768px) {
+@media (min-width: 1200px) {
   .main-content {
-    padding: 2rem 1rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem 3rem;
   }
 
   .content-layout {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    padding: 0 1rem;
-  }
-
-  .left-column {
-    text-align: center;
-    align-items: center;
-    padding-left: 0;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    padding: 0 3rem;
   }
 
   .main-title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 4rem;
   }
 
-  .text-content {
-    gap: 1rem;
+  .text-content p {
+    font-size: 1.25rem;
+    line-height: 1.8;
   }
 
-  .additional-content {
-    margin-top: 2rem;
-    padding: 0 1rem;
+  .section-title {
+    font-size: 1.4rem;
   }
 
-  .galeria-section {
-    padding: 2rem 1rem;
-  }
-
-  .galeria-section h3 {
-    font-size: 2.2rem;
-    padding: 0.8rem 1.5rem;
-  }
-
-  .fotos-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .vencedor-section {
-    padding: 1.5rem 2rem;
-    margin: 2rem auto;
-  }
-
-  .vencedor-texto {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-title {
+  .section-title-blue {
     font-size: 2rem;
   }
 
-  .section-title,
-  .section-title-blue {
-    font-size: 1.2rem;
+  .additional-content {
+    padding: 0 3rem;
+    margin-top: 4rem;
+  }
+
+  .additional-content p {
+    font-size: 1.25rem;
+    line-height: 1.8;
+  }
+
+  .vencedor-section {
+    padding: 3rem 7rem;
+    margin: 4rem auto;
+  }
+
+  .vencedor-texto {
+    font-size: 4rem;
+  }
+
+  .fotos-container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+  }
+
+  .foto-item img {
+    height: 300px;
+  }
+
+  .galeria-section h3 {
+    font-size: 3.5rem;
   }
 }
