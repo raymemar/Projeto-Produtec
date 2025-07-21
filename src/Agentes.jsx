@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import LoginPopup from "./components/LoginPopup";
 import EditableText from "./components/EditableText";
 import CadastroAgente from "./components/CadastroAgente";
+import { useNavigate } from 'react-router-dom';
 import AddAgenteForm from "./components/AddAgenteForm";
 import './Agentes.css';
 import EditableGallery from './components/EditableGallery';
@@ -52,7 +53,8 @@ export default function Agentes() {
     const handleLogoutClick = () => logout();
     const handleClosePopup = () => setIsLoginPopupOpen(false);
     
-    const handleCadastroClick = () => setIsCadastroOpen(true);
+    const navigate = useNavigate();
+    const handleCadastroClick = () => navigate('/cadastro');
     const handleCloseCadastro = () => setIsCadastroOpen(false);
     
     const handleAddAgenteClick = () => setIsAddAgenteOpen(true);

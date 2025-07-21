@@ -8,7 +8,7 @@ import Carnauba from './Carnauba';
 import ArvoresNativas from './ArvoresNativas';
 import Agentes from './Agentes';
 import QuizPage from './QuizPage';
-import CadastroAgentePage from './CadastroAgentePage';
+import CadastroAgentePage from './components/CadastroAgentePage';
 import GerenciadorAgentes from './components/GerenciadorAgentes';
 
 function App() {

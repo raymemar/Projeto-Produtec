@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './components/CadastroAgentePage.css';
+import './CadastroAgentePage.css';
 
 function CadastroAgentePage() {
   const [currentStep, setCurrentStep] = useState(1);
