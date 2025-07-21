@@ -11,55 +11,56 @@ import "./QuizPage.css";
 const perguntas = [
     {
         pergunta: "1. Qual é a árvore símbolo da Caatinga, conhecida por sua resistência à seca e casca esbranquiçada?",
-        opcoes: ["A: Catingueira", "B: Aroeira", "C: Mandacaru", "D: Juazeiro"],
-        resposta: "A: Catingueira",
+        opcoes: ["A: Aroeira", "B: Catingueira", "C: Mandacaru", "D: Juazeiro"],
+        resposta: "B: Catingueira",
     },
     {
         pergunta: "2. Qual dessas árvores possui frutos comestíveis e é muito utilizada na alimentação do sertanejo?",
-        opcoes: ["A: Angico", "B: Umbuzeiro", "C: Pau-d'arco", "D: Jurema-preta"],
-        resposta: "B: Umbuzeiro",
+        opcoes: ["A:  Umbuzeiro", "B: Jurema-preta", "C: Pau-d'arco", "D: Angico"],
+        resposta: "A: Umbuzeiro",
     },
     {
         pergunta: "3. Qual espécie é famosa por suas flores amarelas e é usada na medicina tradicional?",
-        opcoes: ["A: Marmeleiro", "B: Jurema-branca", "C: Catingueira", "D: Imburana"],
-        resposta: "A: Marmeleiro",
+        opcoes: ["A: Imburana", "B: Jurema-branca", "C: Catingueira", "D: Marmeleiro"],
+        resposta: "D: Marmeleiro",
     },
     {
         pergunta: "4. Qual árvore é conhecida por sua madeira resistente e uso em cercas e construções rurais?",
-        opcoes: ["A: Mulungu", "B: Pereiro", "C: Faveleira", "D: Sabiá"],
-        resposta: "B: Pereiro",
+        opcoes: ["A: Sabiá", "B: Mulungu", "C: Pereiro", "D: Faveleira"],
+        resposta: "C: Pereiro",
     },
     {
         pergunta: "5. Qual árvore é conhecida por produzir uma resina medicinal chamada 'breu'?",
-        opcoes: ["A: Angico", "B: Jucá", "C: Aroeira", "D: Barriguda"],
+        opcoes: ["A: Aroeira", "B: Angico", "C: Jucá", "D: Barriguda"],
         resposta: "D: Barriguda",
     },
     {
         pergunta: "6. Qual dessas árvores possui espinhos e é importante para a apicultura na Caatinga?",
-        opcoes: ["A: Mandacaru", "B: Jurema-preta", "C: Xique-xique", "D: Macambira"],
+        opcoes: ["A: Macambira", "B: Jurema-preta", "C: Mandacaru", "D: Xique-xique"],
         resposta: "B: Jurema-preta",
     },
     {
         pergunta: "7. Qual dessas espécies é considerada indicadora de água subterrânea?",
-        opcoes: ["A: Oiticica", "B: Juazeiro", "C: Baraúna", "D: Quixabeira"],
-        resposta: "B: Juazeiro",
+        opcoes: ["A: Baraúna", "B: Quixabeira", "C: Juazeiro", "D: Oiticica"],
+        resposta: "C: Juazeiro",
     },
     {
         pergunta: "8. Qual árvore tem um tronco inchado que armazena água, adaptação à seca?",
-        opcoes: ["A: Juazeiro", "B: Barriguda", "C: Mandacaru", "D: Aroeira"],
-        resposta: "B: Barriguda",
+        opcoes: ["A: Barriguda", "B: Juazeiro", "C: Aroeira", "D: Mandacaru"],
+        resposta: "A: Barriguda",
     },
     {
         pergunta: "9. Qual dessas árvores é típica da Caatinga e fornece sombra para o gado?",
-        opcoes: ["A: Jucá", "B: Sabiá", "C: Angico", "D: Mulungu"],
-        resposta: "B: Sabiá",
+        opcoes: ["A: Jucá", "B: Angico", "C: Sabiá", "D: Mulungu"],
+        resposta: "C: Sabiá",
     },
     {
         pergunta: "10. Qual árvore possui frutos em forma de vagem e é usada como forragem?",
-        opcoes: ["A: Jurema-branca", "B: Algaroba", "C: Catingueira", "D: Imburana"],
-        resposta: "B: Algaroba",
+        opcoes: ["A: Jurema-branca", "B: Catingueira", "C: Imburana", "D: Algaroba"],
+        resposta: "D: Algaroba",
     },
 ];
+
 
 
 function QuizPage() {
@@ -187,13 +188,14 @@ function QuizPage() {
                             </div>
                             <p className="result-message">{mensagem}</p>
                             <div className="action-buttons">
-                                <EditableText
-                                    id="quiz_restart_button"
-                                    initialText="Tentar Novamente"
-                                    tag="button"
-                                    className="quiz-button restart-button"
-                                    onClick={() => window.location.reload()}
-                                />
+                                <Link to="/quiz" className="quiz-button restart-button">
+                                    <EditableText
+                                        id="quiz_restart_button"
+                                        initialText="Tentar Novamente"
+                                        tag="span"
+                                        className="button-text"
+                                    />
+                                </Link>
                                 <Link to="/" className="quiz-button home-button">
                                     <EditableText
                                         id="quiz_home_button"
@@ -317,18 +319,28 @@ function QuizPage() {
                             <h3>{pergunta.pergunta}</h3>
 
                             <div className="options-container">
-                                {pergunta.opcoes.map((opcao, i) => (
-                                    <div
-                                        key={i}
-                                        className={`option ${opcao === selecionada ? 'selected' : ''} ${mostrarResposta && opcao === pergunta.resposta ? 'correct' : ''
-                                            } ${mostrarResposta && opcao === selecionada && opcao !== pergunta.resposta ? 'incorrect' : ''} ${tempoExpirado ? 'disabled' : ''
-                                            }`}
-                                        onClick={() => !mostrarResposta && !tempoExpirado && setSelecionada(opcao)}
-                                    >
-                                        <span className="option-checkbox">●</span>
-                                        {opcao}
-                                    </div>
-                                ))}
+                                {pergunta.opcoes.map((opcao, i) => {
+                                    let optionClass = 'option';
+                                    if (opcao === selecionada) optionClass += ' selected';
+                                    if (mostrarResposta) {
+                                        if (opcao === pergunta.resposta) {
+                                            optionClass += ' correct';
+                                        } else if (opcao === selecionada && opcao !== pergunta.resposta) {
+                                            optionClass += ' incorrect';
+                                        }
+                                    }
+                                    if (tempoExpirado) optionClass += ' disabled';
+                                    return (
+                                        <div
+                                            key={i}
+                                            className={optionClass}
+                                            onClick={() => !mostrarResposta && !tempoExpirado && setSelecionada(opcao)}
+                                        >
+                                            <span className="option-checkbox">●</span>
+                                            {opcao}
+                                        </div>
+                                    );
+                                })}
                             </div>
 
                             {!tempoExpirado && (
