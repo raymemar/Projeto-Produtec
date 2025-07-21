@@ -1,3 +1,45 @@
+@media (min-width: 1200px) {
+  .cadastro-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    min-height: 700px;
+  }
+  .sidebar {
+    width: 300px;
+    padding-top: 2rem;
+  }
+  .main-content {
+    flex: 1;
+    padding: 3rem 4rem;
+  }
+  .step-content h2 {
+    font-size: 2.4rem;
+    margin-bottom: 2rem;
+  }
+  .form-group input,
+  .form-group textarea {
+    font-size: 1.2rem;
+    padding: 1rem;
+  }
+  .form-actions {
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+  .back-button,
+  .continue-button,
+  .submit-button {
+    min-width: 180px;
+    font-size: 1.1rem;
+    padding: 0.8rem 2rem;
+  }
+  .confirm-modal {
+    max-width: 500px;
+  }
+  .confirm-modal-content {
+    padding: 2.5rem;
+  }
+}
 /* ================================
    CADASTRO DE AGENTE - PÁGINA COMPLETA
    ================================ */

@@ -9,13 +9,11 @@ function CadastroAgentePage() {
     nome: '',
     email: '',
     telefone: '',
-    
     // Escola
     escola: '',
-    
+    serie: '',
     // Motivação
     motivacao: '',
-    
     // Termos
     aceitaTermos: false
   });
@@ -45,6 +43,7 @@ function CadastroAgentePage() {
         break;
       case 2:
         if (!formData.escola.trim()) newErrors.escola = 'Escola é obrigatória';
+        if (!formData.serie.trim()) newErrors.serie = 'Série/Ano é obrigatório';
         break;
       case 3:
         if (!formData.motivacao.trim()) newErrors.motivacao = 'Motivação é obrigatória';
@@ -74,7 +73,11 @@ function CadastroAgentePage() {
 
   const nextStep = () => {
     if (validateStep(currentStep)) {
-      setCurrentStep(prev => Math.min(prev + 1, steps.length));
+      if (currentStep === 1 || currentStep === 2) {
+        setShowConfirmModal(true);
+      } else {
+        setCurrentStep(prev => Math.min(prev + 1, steps.length));
+      }
     }
   };
 
@@ -91,9 +94,17 @@ function CadastroAgentePage() {
   const confirmSubmit = () => {
     // Aqui você pode adicionar a lógica para enviar os dados para o servidor
     console.log('Dados do formulário:', formData);
-    
     // Simular envio
     setIsSubmitted(true);
+    setShowConfirmModal(false);
+  };
+
+  const confirmNextStep = () => {
+    setShowConfirmModal(false);
+    setCurrentStep(prev => Math.min(prev + 1, steps.length));
+  };
+
+  const cancelConfirmModal = () => {
     setShowConfirmModal(false);
   };
 
@@ -149,7 +160,6 @@ function CadastroAgentePage() {
         return (
           <div className="step-content">
             <h2>Escola</h2>
-            
             <div className="form-group">
               <label htmlFor="escola">Nome da escola *</label>
               <div className="search-container">
@@ -161,11 +171,20 @@ function CadastroAgentePage() {
                   onChange={(e) => handleInputChange('escola', e.target.value)}
                   className={errors.escola ? 'error' : ''}
                 />
-                <button type="button" className="dropdown-button">
-                  ▼
-                </button>
               </div>
               {errors.escola && <div className="error-message">{errors.escola}</div>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="serie">Série/Ano que está estudando *</label>
+              <input
+                type="text"
+                id="serie"
+                placeholder="Ex: 3º ano, 2ª série, etc."
+                value={formData.serie}
+                onChange={(e) => handleInputChange('serie', e.target.value)}
+                className={errors.serie ? 'error' : ''}
+              />
+              {errors.serie && <div className="error-message">{errors.serie}</div>}
             </div>
           </div>
         );
@@ -235,7 +254,6 @@ function CadastroAgentePage() {
             Voltar
           </Link>
         </header>
-
         <div className="cadastro-content">
           <div className="main-content">
             <div className="success-content">
@@ -253,6 +271,9 @@ function CadastroAgentePage() {
     );
   }
 
+  // Modal de confirmação para etapas 1 e 2
+  const showStepConfirmModal = showConfirmModal && (currentStep === 1 || currentStep === 2);
+
   return (
     <div className="cadastro-page">
       <header className="cadastro-header">
@@ -266,73 +287,57 @@ function CadastroAgentePage() {
       </header>
 
       <div className="cadastro-content">
-        <aside className="sidebar">
+        <div className="sidebar">
           <div className="steps-container">
-            {steps.map((step, index) => (
+            {steps.map((step, idx) => (
               <div
                 key={step.id}
-                className={`step-item ${currentStep === step.id ? 'active' : ''} ${
-                  currentStep > step.id ? 'completed' : ''
-                }`}
+                className={`step-item ${currentStep === step.id ? 'active' : ''} ${currentStep > step.id ? 'completed' : ''}`}
               >
-                <div className="step-circle">{step.id}</div>
+                <div className="step-circle">
+                  {currentStep > step.id ? '✓' : step.id}
+                </div>
                 <div className="step-title">{step.title}</div>
-                {index < steps.length - 1 && <div className="step-line"></div>}
+                {idx < steps.length - 1 && <div className="step-line"></div>}
               </div>
             ))}
           </div>
-        </aside>
+        </div>
 
-        <main className="main-content">
+        <div className="main-content">
           {renderStepContent()}
-
           <div className="form-actions">
             {currentStep > 1 && (
               <button type="button" className="back-button" onClick={prevStep}>
                 Voltar
               </button>
             )}
-            
-            {currentStep < steps.length ? (
+            {currentStep < steps.length && (
               <button type="button" className="continue-button" onClick={nextStep}>
                 Continuar
               </button>
-            ) : (
-              <button
-                type="button"
-                className="submit-button"
-                onClick={handleSubmit}
-                disabled={!formData.aceitaTermos}
-              >
-                Finalizar Cadastro
+            )}
+            {currentStep === steps.length && (
+              <button type="button" className="submit-button" onClick={handleSubmit}>
+                Enviar cadastro
               </button>
             )}
           </div>
-        </main>
+        </div>
       </div>
 
-      {/* Modal de Confirmação */}
-      {showConfirmModal && (
-        <div className="confirm-modal-overlay">
-          <div className="confirm-modal">
+      {showStepConfirmModal && (
+        <div className="confirm-modal-overlay" onClick={cancelConfirmModal}>
+          <div className="confirm-modal" onClick={e => e.stopPropagation()}>
             <div className="confirm-modal-content">
-              <h3>Confirmar Cadastro</h3>
-              <p>
-                Tem certeza de que deseja finalizar seu cadastro como Agente da Caatinga?
-                Após confirmar, suas informações serão enviadas para análise.
-              </p>
+              <h3>Confirmação</h3>
+              <p>Confira atentamente suas informações antes de continuar. Após essa etapa, não será possível fazer alterações.</p>
               <div className="confirm-modal-actions">
-                <button
-                  className="cancel-confirm-button"
-                  onClick={() => setShowConfirmModal(false)}
-                >
-                  Cancelar
+                <button onClick={cancelConfirmModal} className="cancel-confirm-button">
+                  Revisar informações
                 </button>
-                <button
-                  className="continue-confirm-button"
-                  onClick={confirmSubmit}
-                >
-                  Confirmar Cadastro
+                <button onClick={confirmNextStep} className="continue-confirm-button">
+                  Continuar mesmo assim
                 </button>
               </div>
             </div>
