@@ -81,7 +81,19 @@ b {
 }
 
 .intro-section{
-  background-color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
+  background: white;
+  width: 100%;
+  min-height: 50px;
+  overflow: visible;
+  /* min-height removido para evitar espaço extra */
 }
 .caatinga-section {
   max-width: 1200px;
