@@ -558,11 +558,28 @@ html, body {
 }
 
 .home-button {
-    color: #007bff;
+    background-color: #0056b3 !important;
+    color: #fff !important;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    border: none;
+    box-shadow: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    min-width: 200px;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.home-button:hover, .home-button:focus {
+    background-color: #003d80 !important;
+    color: #fff !important;
+    box-shadow: 0 5px 15px rgba(0, 86, 179, 0.15);
+    text-decoration: none;
 }
 
 /* ================================
