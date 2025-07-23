@@ -15,7 +15,7 @@ html, body {
 
 /* Fundo geral */
 .carnauba-page {
-    background: #f7f7e7;
+    background: white;
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
     margin: 0;
