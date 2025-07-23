@@ -188,14 +188,25 @@ function QuizPage() {
                             </div>
                             <p className="result-message">{mensagem}</p>
                             <div className="action-buttons">
-                                <Link to="/quiz" className="quiz-button restart-button">
+                                <button
+                                    className="quiz-button restart-button"
+                                    onClick={() => {
+                                        setFinalizado(false);
+                                        setScore(0);
+                                        setIndice(0);
+                                        setSelecionada("");
+                                        setMostrarResposta(false);
+                                        setTempo(30);
+                                        setTempoExpirado(false);
+                                    }}
+                                >
                                     <EditableText
                                         id="quiz_restart_button"
                                         initialText="Tentar Novamente"
                                         tag="span"
                                         className="button-text"
                                     />
-                                </Link>
+                                </button>
                                 <Link to="/" className="quiz-button home-button">
                                     <EditableText
                                         id="quiz_home_button"
